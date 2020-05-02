@@ -1,0 +1,40 @@
+<script src="./public/modules/Card.js"></script>
+<script src="./public/modules/Board.js"></script>
+<script src="./public/modules/Deck.js"></script>
+<script src="./public/modules/Player.js"></script>
+
+<script>
+
+board = new Board()
+board.add_player("a")
+board.add_player("b")
+board.add_player('c')
+board.add_player('d')
+
+//board.set_starting_hands(52/(board.get_players().length))
+
+board.players[0].sort_hand()
+
+board.players[0].set_fold(true)
+board.players[1].set_fold(true)
+
+board.ranking.push(board.get_player_by_id(0))
+board.ranking.push(board.get_player_by_id(1))
+board.ranking.push(board.get_player_by_id(2))
+board.ranking.push(board.get_player_by_id(3))
+
+board.set_starting_hands(2)
+
+indice = 0
+t = []
+board.players.forEach(p => {
+    t[indice] = 0
+    p.get_hand().forEach(c => {
+        t[indice] += c.get_weight()
+    });
+    indice++
+});
+
+console.log((t[0] > t[2]), t[1] > t[3])
+
+</script>
