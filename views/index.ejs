@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>president.io</title>
+        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/lobby.css">
+    </head>
+
+    <body>
+
+        <div id="login">
+            <div class="left-side">
+                <div class="container">
+                    <h1>president.io</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio quo fuga provident similique ea, esse expedita eos. Doloribus magnam inventore illo quidem pariatur tempora beatae nesciunt, quod amet obcaecati porro!</p>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="container">
+                    <h2>Se connecter</h2>
+                    <div class="form">
+                        <input type="text" name="pseudo" id="pseudo" placeholder="Votre pseudo">
+                        <button id="connection">Connexion</button>
+                        <button id="create_party" class='disabled' disabled>Créer une partie</button>
+                        <p class="warning">Le pseudo doit contenir entre 3 et 20 caractères.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="lobby">
+            <div class="container">
+                <div class="players">
+                    <h2>Liste des joueurs</h2>
+                    <ul class="list_player">
+
+                    </ul>
+                </div>
+                <div class="settings">
+                    <h2>Paramètres</h2>
+                    <div class="set_color">
+                        <h3>Choisir une couleur</h3>
+                        <div class="colors">
+                            <label class="container">
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="checkmark Alpha"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Beta"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Gamma"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Delta"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Epsilon"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Zeta"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="dark_mode">
+                        <h3>Dark mode</h3>
+                        <label class="switch">
+                            <input type="checkbox" onclick="dark_mode()">
+                            <span class="slider round"></span>
+                          </label>
+                    </div>
+                    <div class="start_game">
+                        <h3>Lancement de la partie</h3>
+                        <p>Il faut 4 joueurs minimum pour commencer <span>(<span class="nb_players"></span> / 4)</span></p>
+                        <button class='disabled' onclick="start_game()" disabled>Lancer la partie</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="main_game">
+            <div class="container">
+                <div class="left_side">
+                    <div id="list_players">
+    
+                    </div>
+                </div>
+                <div class="right_side">
+                    <div id="board">
+                        <div id="board_cards">
+                            <div class="bot">
+                                <h3>Informations</h3>
+                                <div id="msg">
+
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="cards">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div id="info">
+                            <div class="ranking">
+                                <h3>Classement</h3>
+                                <p>Nombre de partie <span>1</span></p>
+                                <p>Nombre de tour <span>1</span></p>
+                                <div class="places">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div id="client">
+                        <div id="hand">
+                            
+                        </div>
+                        <div id="options">
+                            <p class="my_name"></p>
+                            <div class="btn play_card">
+                                <i class="material-icons" style="vertical-align:bottom">arrow_upward</i>
+                                <button id="play_this_card" onclick="play_card()">Jouer ces cartes</button>
+                            </div>
+                            <div class="btn fold">
+                                <i class="material-icons" style="vertical-align:bottom">pan_tool</i>
+                                <button id="fold" onclick="fold()">Passer son tour</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <audio id="wow"src="song/wow.mp3" type="audio/ogg">Your browser does not support the audio element.</audio>
+        <audio id="turn"src="song/turn.mp3" type="audio/ogg">Your browser does not support the audio element.</audio>
+        <audio id="triple"src="song/triple.mp3" type="audio/ogg">Your browser does not support the audio element.</audio>
+        <audio id="jump"src="song/jump.mp3" type="audio/ogg">Your browser does not support the audio element.</audio>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="BoardClient.js"></script>
+        <script src="Card.js"></script>
+        <script src="Player.js"></script>
+        <script src="Ranking.js"></script>
+        <script src="js/json_fct.js"></script>
+        <script src="js/rules.js"></script>
+        <script src="js/login.js"></script>
+        <script src="js/lobby.js"></script>
+        <script src="js/effect.js"></script>
+        <script src="js/game.js"></script>
+
+    </body>
+</html> 
