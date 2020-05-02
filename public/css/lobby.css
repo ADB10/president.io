@@ -1,0 +1,168 @@
+#lobby{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    bottom: 100vh;
+    transition: bottom 0.7s ease-out;
+    z-index: 2;
+}
+
+#lobby .container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+}
+
+#lobby .container > *{
+    position: relative;
+    padding: 10px 3%;
+}
+
+#lobby .container .players{
+    width: 35%;
+    background-color: darkcyan;
+}
+
+#lobby .container .settings{
+    width: 65%;
+    background-color: rgb(255, 255, 255);
+}
+
+#lobby .container .settings .start_game .bad_nb_players{
+    color: rgb(219, 35, 35);
+}
+
+#lobby .container .settings .start_game .good_nb_players{
+    color: rgb(13, 173, 13);
+}
+
+/* SET COLORS */
+
+#lobby .container .settings .set_color .colors{
+    display: flex;
+    margin-bottom: 140px;
+}
+
+#lobby .container .settings .set_color .colors .container {
+    position: relative;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    /* Hide the browser's default radio button */
+#lobby .container .settings .set_color .colors .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+    /* Create a custom radio button */
+#lobby .container .settings .set_color .colors .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.Alpha{
+    background-color: #2455D2;
+}
+
+.Beta {
+    background-color: #FFC700;
+}
+
+.Gamma {
+    background-color: #DB00FF;
+}
+
+.Delta {
+    background-color: #32DE6C;
+}
+
+.Epsilon {
+    background-color: #FF007A;
+}
+
+.Zeta {
+    background-color: #FF6B6B;
+}
+
+#lobby .container .settings .set_color .colors .container input:checked ~ .checkmark {
+    border: 2px solid black;
+}
+
+/* DARK MODE */
+
+#lobby .container .settings .dark_mode{
+    margin-bottom: 70px;
+}
+
+#lobby .container .settings .dark_mode .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+  
+#lobby .container .settings .dark_mode .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#lobby .container .settings .dark_mode .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#lobby .container .settings .dark_mode .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 255, 255);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#lobby .container .settings .dark_mode input:checked + .slider:before {
+    background-color: rgb(20, 20, 20);
+}
+  
+#lobby .container .settings .dark_mode input:focus + .slider {
+    box-shadow: 0 0 1px rgb(133, 133, 133);
+}
+
+  
+#lobby .container .settings .dark_mode input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+  
+  /* Rounded sliders */
+#lobby .container .settings .dark_mode .slider.round {
+    border-radius: 34px;
+}
+  
+#lobby .container .settings .dark_mode .slider.round:before {
+    border-radius: 50%;
+}  
