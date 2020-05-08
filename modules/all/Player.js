@@ -9,6 +9,7 @@ class Player {
         this.fold = false
         this.ranked = false
         this.connected = false
+        this.id_board = null
     }
 
     set_hand(hand){
@@ -21,6 +22,18 @@ class Player {
     
     set_ranked(b){
         this.ranked = b
+    }
+
+    set_id(id){
+        this.id = id
+    }
+
+    set_name(name){
+        this.name = name
+    }
+
+    set_id_board(id){
+        this.id_board = id
     }
 
     get_id(){
@@ -37,6 +50,10 @@ class Player {
 
     get_hand_size(){
         return this.hand.length
+    }
+
+    get_id_board(){
+        return this.id_board
     }
 
     get_card_by_id(id){
