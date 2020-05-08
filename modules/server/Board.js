@@ -1,19 +1,18 @@
 class Board{
 
-    constructor(){
-        // (id_max == id_player) != (indice tab)
-        this.id_max = 0
+    constructor(id){
+        this.id = id
         this.player_turn = null
         this.round_winner = null
         this.jump = false
         this.deck = null
         this.players = []
         this.pot = null
-        // this.pot = {
-        //     player: null, 
-        //     cards: [],
-        // }
         this.ranking = null
+    }
+
+    get_id(){
+        return this.id
     }
 
     get_deck(){
@@ -92,10 +91,8 @@ class Board{
         this.player_turn = player
     }
 
-    add_player(name){
-        this.players.push(create_player(this.id_max, name, []))
-        this.id_max++
-        return (this.id_max - 1)
+    add_player(p){
+        this.players.push(p)
     }
 
     remove_player(id){
@@ -158,7 +155,7 @@ class Board{
                     } else {
                         let players_in_game = 0
                         let last_player = null
-                        board.get_players().forEach(p => {
+                        this.players.forEach(p => {
                             if(!p.is_fold() && !p.is_ranked()){
                                 players_in_game++
                                 last_player = p
@@ -233,7 +230,7 @@ class Board{
 
 }
 
-function create_board(){
-    return new Board()
+function create_board(id){
+    return new Board(id)
 }
 
