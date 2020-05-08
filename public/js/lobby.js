@@ -1,12 +1,7 @@
 socket.on('new_player', function(p){
     p = JSON_parse_player(p)
-    if(my_player.is_connected()){
-        display_player_lobby(p.get_id(), p.get_name())
-        //if(p.get_id() != my_player.get_id()){
-            //console.log(my_board.get_players())
-            my_board.add_player(p)
-        //}
-    }
+    display_player_lobby(p.get_id(), p.get_name())
+    my_board.add_player(p)
     display_nb_players(my_board.get_nb_players())
 })
 

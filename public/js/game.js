@@ -24,19 +24,19 @@ function start_game(){
     }
 }
 
-socket.on('ask_for_hand', function(nb_cards){
+socket.on('ask_for_hand', function(){
     $('#lobby').fadeOut()
     $('#main_game').fadeIn()
     display_players_game()
     $('#board > #board_cards > .cards > *').remove()
     $('#client > #hand > *').remove()
-    $('.nb_cards').text(nb_cards + '')
     socket.emit('ask_for_hand')
 })
 
 socket.on('your_hand', function(player){
     my_player = JSON_parse_player(player)
     display_hand()
+    $('.nb_cards').text(my_player.get_hand_size() + '')
     socket.emit('get_turn')
 })
 

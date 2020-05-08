@@ -8,7 +8,8 @@ my_board = new BoardClient()
 my_player = new Player(null, null, [])
 first_connection = true
 
-socket = io.connect('http://localhost:8080/');
+//socket = io.connect('http://localhost:8080/');
+socket = io.connect('http://adriandev.ddns.net:45850/');
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -36,45 +37,41 @@ $('#login').fadeOut()
 socket.emit('connection_try', (randomHex() + ''))
 */
 
-$('#login .right-side .form #connection').click(function(){
+$('#login .right-side .form #create_board').click(function(){
     pseudo = escapeHtml(document.getElementById('pseudo').value)
-    if(pseudo.length > 2 && pseudo.length < 21 && first_connection){
-        first_connection = false
-        $('#lobby').css('bottom', '0px')
-        $('#login').fadeOut()
-        socket.emit('connection_try', pseudo)
+    if(pseudo.length > 2 && pseudo.length < 21){
+        socket.emit('create_board', pseudo)
     } else {
         $('#login .right-side .form .warning').fadeIn();
     }
 })
 
-socket.on('connected_ok', function(data){
-    my_player = JSON_parse_player(data.my_player)
-    for (let i = 0; i < data.tab_id_players.length; i++) {
-        if(my_player.get_id() != data.tab_id_players[i]){
-            my_board.add_player(new Player(data.tab_id_players[i], data.tab_name_players[i], []))
-        }
+$('#login .right-side .form #join_board').click(function(){
+    pseudo = escapeHtml(document.getElementById('pseudo').value)
+    id_board = escapeHtml(document.getElementById('id_board').value)
+    if(pseudo.length > 2 && pseudo.length < 21 && id_board.length == 4){
+        socket.emit('join_board', {
+            pseudo: pseudo,
+            id_board: parseInt(id_board, 10)
+        })
+    } else {
+        $('#login .right-side .form .warning').fadeIn();
     }
-    socket.emit('connected')
-    display_players_lobby()
 })
 
-function escapeHtml(text) {
-    var map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
-}
+socket.on('connection_failed', function(){
+    $('#login .right-side .form .warning').text("Mauvais code.");
+    $('#login .right-side .form .warning').fadeIn();
+})
 
-function randomHex(){
-    return ('#' + (function co(lor){   
-        return (lor +=
-        [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
-        && (lor.length == 6) ?  lor : co(lor); 
-    })('')
-    )
-}
+socket.on('connected_ok', function(data){
+    $('#lobby').css('bottom', '0px')
+    $('#login').fadeOut()
+    my_player = JSON_parse_player(data.my_player)
+    my_board.add_player(my_player)
+    data.other_players.forEach(p => {
+        p = JSON_parse_player(p)
+        if(my_player.get_id() != p.get_id()) my_board.add_player(p)
+    });
+    display_players_lobby()
+})

@@ -16,6 +16,7 @@ function JSON_parse_player(player){
     p.fold = player.fold
     p.ranked = player.ranked
     p.connected = player.connected
+    p.id_board = player.id_board
     return p
 }
 
@@ -29,4 +30,24 @@ function JSON_parse_ranking(ranking){
         r.add_neutral(JSON_parse_player(p))
     });
     return r
+}
+
+function escapeHtml(text) {
+    var map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+function randomHex(){
+    return ('#' + (function co(lor){   
+        return (lor +=
+        [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+        && (lor.length == 6) ?  lor : co(lor); 
+    })('')
+    )
 }
