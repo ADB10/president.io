@@ -9,7 +9,7 @@ my_player = new Player(null, null, [])
 first_connection = true
 
 //socket = io.connect('http://localhost:8080/');
-socket = io.connect('http://adriandev.ddns.net:45850/');
+socket = io.connect('http://35.239.160.66/');
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
