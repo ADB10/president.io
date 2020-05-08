@@ -3,8 +3,8 @@
     height: 100%;
     display: flex;
     z-index: 1;
+    background-color: rgb(255,255,255);
 }
-
 #login .left-side{
     width: 0%;
     background-color: darkcyan;
@@ -25,13 +25,21 @@
     display: none;
 }
 
+#login .right-side .form > *{
+    margin-bottom: 5px;
+    text-align: left;
+}
 
-#login .right-side .form #pseudo{
+#login .right-side .form input{
     width: 100%;
     max-width: 300px;
     padding: 0.7em 1em;
     border: none;
     background-color: rgb(230,230,230);
+}
+
+#login .right-side .form #id_board{
+    margin-top: 30px;
 }
 
 #login .right-side .form .warning{
