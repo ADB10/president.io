@@ -26,9 +26,10 @@
                     <h2>Se connecter</h2>
                     <div class="form">
                         <input type="text" name="pseudo" id="pseudo" placeholder="Votre pseudo">
-                        <button id="connection">Connexion</button>
-                        <button id="create_party" class='disabled' disabled>Créer une partie</button>
+                        <button id="create_board">Créer une partie</button>
                         <p class="warning">Le pseudo doit contenir entre 3 et 20 caractères.</p>
+                        <input type="text" name="id_board" id="id_board" placeholder="Code de partie (____)">
+                        <button id="join_board">Rejoindre la partie</button>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
 
         <div id="lobby">
             <div class="container">
-                <div class="players">
+                <div class="players"> 
                     <h2>Liste des joueurs</h2>
                     <ul class="list_player">
 
