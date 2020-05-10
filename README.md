@@ -4,7 +4,7 @@
 
 ### 27/04/2020
 
-- (28/04/2020) bug avec card_selected
+- [ ] (28/04/2020) bug avec card_selected
 - ❌ faire commencer la dame de coeur lors de la premiere partie
 - (28/04/2020) ajout regle : 4 carte pareille ferme le jeu
 
