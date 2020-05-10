@@ -36,8 +36,8 @@ server = create_server()
 
 io.sockets.on('connection', function(socket) {
 
-    socket.player = null
-    socket.board = null
+    socket.player = null // view on player
+    socket.board = null // view on board
 
     function setup_socket_connection(){
         socket.join(socket.board.get_id())
@@ -155,6 +155,6 @@ io.sockets.on('connection', function(socket) {
 
 })
 
-//server.listen(8080)
-server_http.listen(45850);
+server_http.listen(8080)
+//server_http.listen(45850);
  

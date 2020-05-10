@@ -18,7 +18,11 @@
             <div class="left-side">
                 <div class="container">
                     <h1>president.io</h1>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio quo fuga provident similique ea, esse expedita eos. Doloribus magnam inventore illo quidem pariatur tempora beatae nesciunt, quod amet obcaecati porro!</p>
+                    <p>
+                        Jouez au jeu du Président (trou du cul) en ligne.<br><br>
+                        Pour créer une partie, rentrez un pseudo et cliquez sur "Créer une partie", vous obtenez un code de partie que vous pouvez partagez à vos amis.<br><br>
+                        Pour rejoindre une partie, rentrez votre pseudo et le code de la partie puis cliquez sur "Rejoindre la partie".
+                    </p>
                 </div>
             </div>
             <div class="right-side">
@@ -37,15 +41,12 @@
 
         <div id="lobby">
             <div class="container">
-                <div class="players"> 
-                    <h2>Liste des joueurs</h2>
-                    <ul class="list_player">
-
-                    </ul>
-                </div>
+                <ul class="list_player">
+                    <h2 style="height: 100px; margin:0; background-color: rgb(10,10,10);">Joueurs</h2>
+                </ul>
                 <div class="settings">
                     <h2>Paramètres</h2>
-                    <div class="set_color">
+                    <!-- <div class="set_color">
                         <h3>Choisir une couleur</h3>
                         <div class="colors">
                             <label class="container">
@@ -73,17 +74,21 @@
                                 <span class="checkmark Zeta"></span>
                             </label>
                         </div>
-                    </div>
-                    <div class="dark_mode">
+                    </div> -->
+                    <!-- <div class="dark_mode">
                         <h3>Dark mode</h3>
                         <label class="switch">
                             <input type="checkbox" onclick="dark_mode()">
                             <span class="slider round"></span>
                           </label>
-                    </div>
+                    </div> -->
                     <div class="start_game">
                         <h3>Lancement de la partie</h3>
-                        <p>Il faut 4 joueurs minimum pour commencer <span>(<span class="nb_players"></span> / 4)</span></p>
+                        <p>
+                            Il faut 4 joueurs minimum pour lancer une partie, vos amis peuvent vous rejoindre avec votre code de partie.<br><br>
+                            Votre code de partie est <span class="code_party"></span><br>
+                            Nombre de joueurs dans votre partie : <span class="nb_players"></span> / 6
+                        </p>
                         <button class='disabled' onclick="start_game()" disabled>Lancer la partie</button>
                     </div>
                 </div>

@@ -3,26 +3,35 @@
     height: 100%;
     display: flex;
     z-index: 1;
-    background-color: rgb(255,255,255);
 }
 #login .left-side{
     width: 0%;
-    background-color: darkcyan;
+    background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards.jpg');
+    background-size: cover;
     transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding: 10% 10% 0%;
+    
 }
 
 #login .left-side .container{
-    display: none;
+    font-weight: bold;
+    color: white;
 }
 
+#login .left-side .container p{
+    color: rgb(210,210,210);
+    letter-spacing: 1px;
+}
+
+
 #login .right-side{
+    background-color: rgb(10,10,10);
     width: 40%;
     padding: 10% 5% 0%;
 }
 
-#login .right-side .container{
-    display: none;
+#login .right-side .container h2{
+    color: rgb(240, 240, 240);
 }
 
 #login .right-side .form > *{

@@ -30,17 +30,18 @@ p{
 }
 
 button{
-    color: white;
+    color: rgb(41, 41, 41);
     border: none;
     max-width: 300px;
     width: 100%;
-    background-color: darkcyan;
+    background-color: rgb(232, 185, 18);
     padding: 0.7em 1em;
     cursor: pointer;
+    transition: 0s;
 }
 
 button:hover{
-    background-color: rgb(22, 185, 185);
+    background-color: rgb(255, 207, 35);
 }
 
 input, button{

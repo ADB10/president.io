@@ -15,19 +15,34 @@
     display: flex;
 }
 
-#lobby .container > *{
-    position: relative;
-    padding: 10px 3%;
+#lobby .container .list_player{
+    background-color: rgb(30,30,30);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
 }
 
-#lobby .container .players{
-    width: 35%;
-    background-color: darkcyan;
+#lobby .container .list_player > *{
+    color: white;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    font-weight: bold;
 }
 
 #lobby .container .settings{
+    padding: 10px 3%;
     width: 65%;
     background-color: rgb(255, 255, 255);
+}
+
+#lobby .container .settings .code_party{
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 #lobby .container .settings .start_game .bad_nb_players{
@@ -72,27 +87,27 @@
     border-radius: 10px;
 }
 
-.Alpha{
+#lobby .container .list_player li:nth-child(2), .Alpha{
     background-color: #2455D2;
 }
 
-.Beta {
+#lobby .container .list_player li:nth-child(3), .Beta {
     background-color: #FFC700;
 }
 
-.Gamma {
+#lobby .container .list_player li:nth-child(4), .Gamma {
     background-color: #DB00FF;
 }
 
-.Delta {
+#lobby .container .list_player li:nth-child(5), .Delta {
     background-color: #32DE6C;
 }
 
-.Epsilon {
+#lobby .container .list_player li:nth-child(6), .Epsilon {
     background-color: #FF007A;
 }
 
-.Zeta {
+#lobby .container .list_player li:nth-child(7), .Zeta {
     background-color: #FF6B6B;
 }
 

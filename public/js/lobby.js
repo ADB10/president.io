@@ -42,7 +42,7 @@ function display_nb_players(nb) {
 
 function display_player_lobby(id, name){
     txt = '<li id="lobby_' + id +'" >' + name + '</li>'
-    $('#lobby .container .players .list_player').append(txt)
+    $('#lobby .container .list_player').append(txt)
 }
 
 function dark_mode(){
