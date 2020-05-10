@@ -15,7 +15,6 @@
 - [x] (27/04/2020) regler les bugs d'affichage dans le tchat
 - [x] (27/04/2020) player1 joue player2 apres lui se fait sauter tout le monde fold meme player1 mais c'est a player2 alors que p1 remporte
 - [ ] ajouter un timer
-- [ ] ajout d'un hote pour gerer les messages (seulement lui demande au serveur puis server broadcast)
 
 **25/04/2020**
 
