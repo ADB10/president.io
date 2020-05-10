@@ -189,6 +189,20 @@ class Board{
         else this.player_turn = this.pot.get_player()
     }
 
+    start_game(){
+        if(this.get_ranking() == null){ // if first game random else tdc (set in set_start_hands)
+            this.player_turn = this.players[(Math.floor(Math.random() * Math.floor(this.players.length)))]
+        }
+        this.round_winner = false
+        this.jump = false
+        this.reset_players_fold()
+        this.reset_players_hand()
+        this.reset_players_turn()
+        this.reset_pot()
+        this.set_starting_hands(Math.floor(8/(this.players.length)))
+        this.reset_ranking()
+    }
+
     reset_players_fold(){
         this.players.forEach(p => {
             p.set_fold(false)

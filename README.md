@@ -2,6 +2,10 @@
 
 ## TO DO LIST
 
+**10/05/2020**
+
+- [ ] gestion connect / deconnect entre les parties
+
 **27/04/2020**
 
 - [x] (28/04/2020) bug avec card_selected
@@ -37,6 +41,7 @@
 
 **10/05/2020**
 
+* la partie se relance automatiquement au bout de 3 secondes
 * ajout systeme de room
 
 **28/04/2020**

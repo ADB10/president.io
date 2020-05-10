@@ -72,16 +72,7 @@ io.sockets.on('connection', function(socket) {
     })
 
     socket.on('start_game', function(){
-        // empeche d'actualiser la page pour recommencer on doit restart le serva cahque fois
-        if(socket.board.get_ranking() == null) socket.board.set_player_turn(socket.board.get_players()[(Math.floor(Math.random() * Math.floor(socket.board.get_players().length)))]) // if first game random else tdc (set in set_start_hands)
-        socket.board.reset_players_hand()
-        socket.board.reset_players_fold()
-        socket.board.reset_players_turn()
-        socket.board.round_winner = null
-        socket.board.jump = false
-        socket.board.set_starting_hands(Math.floor(52/(socket.board.get_players().length)))
-        socket.board.reset_ranking()
-        socket.board.reset_pot()
+        socket.board.start_game()
         io.sockets.to(socket.board.get_id()).emit('ask_for_hand')
     })
 
@@ -106,6 +97,8 @@ io.sockets.on('connection', function(socket) {
             socket.board.next_player_turn() // get tdc id
             socket.board.get_ranking().add_player(socket.board.get_player_turn())
             io.sockets.to(socket.board.get_id()).emit('end_game', socket.board.get_ranking())
+            socket.board.start_game() // restart game directly
+            setTimeout(function(){io.sockets.to(socket.board.get_id()).emit('ask_for_hand')}, 3000)
         }
     })
 

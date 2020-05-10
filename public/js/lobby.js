@@ -12,7 +12,7 @@ socket.on('player_disconnected', function(id){
 })
 
 function remove_player_lobby(id){
-    $('#lobby .container .players .list_player #lobby_' + id).remove()
+    $('#lobby .container .players #lobby_' + id).remove()
 }
 
 function display_players_lobby(){
