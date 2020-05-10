@@ -1,9 +1,7 @@
 #lobby{
     width: 100%;
     height: 100vh;
-    position: absolute;
-    bottom: 100vh;
-    transition: bottom 0.7s ease-out;
+    opacity: 0;
     z-index: 2;
 }
 
@@ -16,7 +14,7 @@
 }
 
 #lobby .container .list_player{
-    background-color: rgb(30,30,30);
+    background-color: rgb(20,20,20);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -27,9 +25,10 @@
 
 #lobby .container .list_player > *{
     color: white;
-    width: 100%;
-    height: 100px;
-    line-height: 100px;
+    margin: 5px auto;
+    width: 90%;
+    height: 75px;
+    line-height: 75px;
     text-align: center;
     font-weight: bold;
 }
@@ -37,7 +36,8 @@
 #lobby .container .settings{
     padding: 10px 3%;
     width: 65%;
-    background-color: rgb(255, 255, 255);
+    background-size: cover;
+    background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards2.jpg');
 }
 
 #lobby .container .settings .code_party{

@@ -3,7 +3,7 @@ body{
     height: 100vh;
     font-size: 1.2em;
     overflow-y: hidden;
-    background-color: rgb(30,30,30);
+    background-color: rgb(20,20,20);
 }
 
 *{
@@ -13,15 +13,15 @@ body{
 }
 
 h2{
-    color: rgb(0,0,0);
+    color: rgb(240,240,240);
 }
 
 h3{
-    color: rgb(20,20,20);
+    color: rgb(225,225,225);
 }
 
 p{
-    color: rgb(55,55,55);
+    color: rgb(210,210,210);
 }
 
 .disabled{
@@ -49,9 +49,10 @@ input, button{
 }
 
 #main_game{
-    display: none;
+    opacity: 0;
     height: 100%;
     width: 100%;
+    z-index: 3;
 }
 
 #main_game > .container{

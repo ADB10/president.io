@@ -25,8 +25,11 @@ function start_game(){
 }
 
 socket.on('ask_for_hand', function(){
-    $('#lobby').fadeOut()
-    $('#main_game').fadeIn()
+    $('#lobby').css('opacity', '0')
+    setTimeout(function(){
+        $('#lobby').css('display', 'none')
+        $('#main_game').css('opacity', '1')
+    }, 500)
     display_players_game()
     $('#board > #board_cards > .cards > *').remove()
     $('#client > #hand > *').remove()

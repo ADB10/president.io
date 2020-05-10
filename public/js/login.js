@@ -65,14 +65,17 @@ socket.on('connection_failed', function(){
 })
 
 socket.on('connected_ok', function(data){
-    $('#lobby').css('bottom', '0px')
-    $('#login').fadeOut()
+    $('#login').css('opacity', '0')
+    setTimeout(function(){
+        $('#login').css('display', 'none')
+        $('#lobby').css('opacity', '1')
+    }, 500)
     my_player = JSON_parse_player(data.my_player)
-    my_board.add_player(my_player)
     data.other_players.forEach(p => {
         p = JSON_parse_player(p)
         if(my_player.get_id() != p.get_id()) my_board.add_player(p)
     });
+    my_board.add_player(my_player)
     $('#lobby .container .settings .code_party').text(my_player.get_id_board())
     display_players_lobby()
 })
