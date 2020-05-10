@@ -2,7 +2,7 @@
 
 ## To do list
 
-### 27/04/2020
+**27/04/2020**
 
 - [x] (28/04/2020) bug avec card_selected
 - ❌ faire commencer la dame de coeur lors de la premiere partie
