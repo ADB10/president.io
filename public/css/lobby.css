@@ -1,29 +1,27 @@
-#lobby{
+#board{
     width: 100%;
     height: 100vh;
     opacity: 0;
     z-index: 2;
-}
-
-#lobby .container{
+    display: none;
+    transition: opacity 0.5s;
     width: 100%;
     height: 100%;
     position: relative;
-    background-color: rgb(255, 255, 255);
-    display: flex;
+    background-color: rgb(35, 35, 35);
 }
 
-#lobby .container .list_player{
+/* #board .list_player{
     background-color: rgb(20,20,20);
     padding: 0;
     margin: 0;
     list-style: none;
-    width: 35%;
+    min-width: 400px;
     display: flex;
     flex-direction: column;
 }
 
-#lobby .container .list_player > *{
+#board .list_player > *{
     color: white;
     margin: 5px auto;
     width: 90%;
@@ -31,36 +29,36 @@
     line-height: 75px;
     text-align: center;
     font-weight: bold;
-}
+} */
 
-#lobby .container .settings{
-    padding: 10px 3%;
-    width: 65%;
+#board .settings{
+    width: 100%;
     background-size: cover;
-    background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards2.jpg');
+    background-color: rgb(40,40,40);
+    /* background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards2.jpg'); */
 }
 
-#lobby .container .settings .code_party{
+#board .settings .code_party{
     font-size: 1.2em;
     font-weight: bold;
 }
 
-#lobby .container .settings .start_game .bad_nb_players{
+#board .settings .start_game .bad_nb_players{
     color: rgb(219, 35, 35);
 }
 
-#lobby .container .settings .start_game .good_nb_players{
+#board .settings .start_game .good_nb_players{
     color: rgb(13, 173, 13);
 }
 
 /* SET COLORS */
 
-#lobby .container .settings .set_color .colors{
+#board .settings .set_color .colors{
     display: flex;
     margin-bottom: 140px;
 }
 
-#lobby .container .settings .set_color .colors .container {
+#board .settings .set_color .colors .container {
     position: relative;
     cursor: pointer;
     font-size: 22px;
@@ -71,14 +69,14 @@
 }
 
     /* Hide the browser's default radio button */
-#lobby .container .settings .set_color .colors .container input {
+#board .settings .set_color .colors .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
     /* Create a custom radio button */
-#lobby .container .settings .set_color .colors .checkmark {
+#board .settings .set_color .colors .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -87,54 +85,28 @@
     border-radius: 10px;
 }
 
-#lobby .container .list_player li:nth-child(2), .Alpha{
-    background-color: #2455D2;
-}
 
-#lobby .container .list_player li:nth-child(3), .Beta {
-    background-color: #FFC700;
-}
-
-#lobby .container .list_player li:nth-child(4), .Gamma {
-    background-color: #DB00FF;
-}
-
-#lobby .container .list_player li:nth-child(5), .Delta {
-    background-color: #32DE6C;
-}
-
-#lobby .container .list_player li:nth-child(6), .Epsilon {
-    background-color: #FF007A;
-}
-
-#lobby .container .list_player li:nth-child(7), .Zeta {
-    background-color: #FF6B6B;
-}
-
-#lobby .container .settings .set_color .colors .container input:checked ~ .checkmark {
-    border: 2px solid black;
-}
 
 /* DARK MODE */
 
-#lobby .container .settings .dark_mode{
+#board .settings .dark_mode{
     margin-bottom: 70px;
 }
 
-#lobby .container .settings .dark_mode .switch {
+#board .settings .dark_mode .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
   
-#lobby .container .settings .dark_mode .switch input { 
+#board .settings .dark_mode .switch input { 
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-#lobby .container .settings .dark_mode .slider {
+#board .settings .dark_mode .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -146,7 +118,7 @@
     transition: .4s;
 }
 
-#lobby .container .settings .dark_mode .slider:before {
+#board .settings .dark_mode .slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -158,26 +130,26 @@
     transition: .4s;
 }
 
-#lobby .container .settings .dark_mode input:checked + .slider:before {
+#board .settings .dark_mode input:checked + .slider:before {
     background-color: rgb(20, 20, 20);
 }
   
-#lobby .container .settings .dark_mode input:focus + .slider {
+#board .settings .dark_mode input:focus + .slider {
     box-shadow: 0 0 1px rgb(133, 133, 133);
 }
 
   
-#lobby .container .settings .dark_mode input:checked + .slider:before {
+#board .settings .dark_mode input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
   
   /* Rounded sliders */
-#lobby .container .settings .dark_mode .slider.round {
+#board .settings .dark_mode .slider.round {
     border-radius: 34px;
 }
   
-#lobby .container .settings .dark_mode .slider.round:before {
+#board .settings .dark_mode .slider.round:before {
     border-radius: 50%;
 }  

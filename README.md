@@ -39,6 +39,10 @@
 
 ## PATCH NOTE
 
+**11/05/2020**
+
+* refonte design, div player toujours la meme settings devient board au lancement de la partie
+
 **10/05/2020**
 
 * la partie se relance automatiquement au bout de 3 secondes

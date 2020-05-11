@@ -1,0 +1,111 @@
+#players{
+    position: relative;
+    height: 100%;
+    min-width: 400px;
+    max-width: 400px;
+    background-color: rgb(20,20,20);
+    transition: all 1s;
+}
+
+#players.open > *:not(:first-child){
+    display: flex;
+    transition: all 0.3s;
+}
+
+#players.close > *:not(:first-child){
+    display: none;
+}
+
+#players .collapse{
+    position: absolute;
+    right: -25px;
+    top: 20px;
+    color: white;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(20,20,20);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+#players .collapse:hover{
+    background-color: rgb(10,10,10);
+}
+
+#players .collapse .close{
+    font-size: 50px;
+}
+
+#players .collapse .open{
+    line-height: 50px;
+    text-align: center;
+    font-size: 35px;
+    display: none;
+}
+
+
+#players header{
+    width: 100%;
+}
+
+#players header h2{
+    font-size: 25px;
+    text-transform: uppercase;
+    margin: 30px 0px 70px 30px;
+}
+
+#players header span.code_party{
+    color: red;
+}
+
+#players .player{
+    padding: 10px 0px 10px 30px;
+    display: flex;
+    color: white;
+}
+
+#players .player > i{
+    font-size: 40px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#players .player > .pseudo{
+    margin: 0px 10px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+}
+
+#players div.player:nth-child(2) > i, .Alpha{
+    background-color: #2455D2;
+}
+
+#players div.player:nth-child(3) > i, .Beta {
+    background-color: #FFC700;
+}
+
+#players div.player:nth-child(4) > i, .Gamma {
+    background-color: #DB00FF;
+}
+
+#players div.player:nth-child(5) > i, .Delta {
+    background-color: #32DE6C;
+}
+
+#players div.player:nth-child(6) > i, .Epsilon {
+    background-color: #FF007A;
+}
+
+#players div.player:nth-child(7) > i, .Zeta {
+    background-color: #FF6B6B;
+}
+
+#board .container .settings .set_color .colors .container input:checked ~ .checkmark {
+    border: 2px solid black;
+}

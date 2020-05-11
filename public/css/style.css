@@ -1,7 +1,6 @@
 body{
     margin: 0;
     height: 100vh;
-    font-size: 1.2em;
     overflow-y: hidden;
     background-color: rgb(20,20,20);
 }
@@ -9,7 +8,6 @@ body{
 *{
     font-family: 'Rubik', sans-serif;
     box-sizing: border-box;
-    transition: all 0.5s ease;
 }
 
 h2{
@@ -21,6 +19,7 @@ h3{
 }
 
 p{
+    font-size: 20px;
     color: rgb(210,210,210);
 }
 

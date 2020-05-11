@@ -3,19 +3,22 @@
     height: 100%;
     display: flex;
     z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s;
 }
 
 #login .left-side{
-    width: 0%;
     background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards.jpg');
     background-size: cover;
-    transition: width 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    padding: 10% 10% 0%;
-    
 }
 
 #login .left-side .container{
+    padding: 200px 200px 0px 100px;
     font-weight: bold;
+}
+
+#login .left-side .container h1{
+    font-size: 50px;
     color: white;
 }
 
@@ -28,10 +31,15 @@
 #login .right-side{
     background-color: rgb(20,20,20);
     width: 40%;
-    padding: 10% 5% 0%;
+}
+
+#login .right-side .container{
+    background-color: rgb(20,20,20);
+    padding: 200px 0px 0px 100px;
 }
 
 #login .right-side .container h2{
+    font-size: 40px;
     color: rgb(240, 240, 240);
 }
 

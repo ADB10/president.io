@@ -19,6 +19,7 @@ socket = io.connect('http://localhost:8080/');
 
 
 $(document).ready(function(){
+    $('#login').css('opacity', '1')
     $('#login .left-side').css('width', '60%')
     $('#login .left-side .container').slideDown(1000)
     $('#login .right-side .container').slideDown(1000)
@@ -66,9 +67,10 @@ socket.on('connection_failed', function(){
 
 socket.on('connected_ok', function(data){
     $('#login').css('opacity', '0')
+    $('#board').css('display', 'flex')
     setTimeout(function(){
         $('#login').css('display', 'none')
-        $('#lobby').css('opacity', '1')
+        $('#board').css('opacity', '1')
     }, 500)
     my_player = JSON_parse_player(data.my_player)
     data.other_players.forEach(p => {
@@ -76,6 +78,5 @@ socket.on('connected_ok', function(data){
         if(my_player.get_id() != p.get_id()) my_board.add_player(p)
     });
     my_board.add_player(my_player)
-    $('#lobby .container .settings .code_party').text(my_player.get_id_board())
-    display_players_lobby()
+    display_players_first_connection()
 })

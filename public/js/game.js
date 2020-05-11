@@ -1,13 +1,13 @@
-function display_players_game(){
-    $("#list_players > *").remove()
-    my_board.get_players().forEach(p => { display_new_player(p.get_id(), p.get_name()) });
-    $('#client > #options .my_name').text(my_player.get_name())
-}
+// function display_players_game(){
+//     $("#list_players > *").remove()
+//     my_board.get_players().forEach(p => { display_new_player(p.get_id(), p.get_name()) });
+//     $('#client > #options .my_name').text(my_player.get_name())
+// }
 
-function display_new_player(id, name){
-    $('#list_players').append('<div id="player_' + id + '" class="player"><p class="'+ name + ' score"><span class="nb_cards">' + '0' + '</span></p><p class="'+ name + ' name">' + name +'</p></div>')
-    $("#list_players > *").css("line-height", (window.innerHeight*(1/my_board.get_nb_players())) + "px")
-}
+// function display_new_player(id, name){
+//     $('#list_players').append('<div id="player_' + id + '" class="player"><p class="'+ name + ' score"><span class="nb_cards">' + '0' + '</span></p><p class="'+ name + ' name">' + name +'</p></div>')
+//     $("#list_players > *").css("line-height", (window.innerHeight*(1/my_board.get_nb_players())) + "px")
+// }
 
 function remove_player(id){
     $('#list_players #player_' + id).remove()
