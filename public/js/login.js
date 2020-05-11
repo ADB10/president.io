@@ -3,8 +3,8 @@ let my_player = new Player(null, null, [])
 let screen_width_size = $(document).width();
 let screen_height_size = $(document).height();
 
-socket = io.connect('http://localhost:8080/');
-//socket = io.connect('http://35.239.160.66/');
+//socket = io.connect('http://localhost:8080/');
+socket = io.connect('http://35.239.160.66/');
 
 $(document).ready(function(){
     $('#login').css('opacity', '1')
