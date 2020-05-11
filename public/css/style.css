@@ -1,7 +1,7 @@
 body{
     margin: 0;
     height: 100vh;
-    overflow-y: hidden;
+    overflow-x: hidden;
     background-color: rgb(20,20,20);
 }
 
@@ -47,133 +47,7 @@ input, button{
     font-size: 1em;
 }
 
-#main_game{
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 3;
-}
-
-#main_game > .container{
-    height: 100%;
-    width: 100%;
-    display: flex;
-}
-
-.one_card{
-    min-width: 3em;
-    height: 100%;
-    margin: 1px;
-    background-color:rgb(255, 255, 255);
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 2em;
-    text-align: center;
-}
-
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* LEFT SIDE */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-#main_game > .container > .left_side{
-    position: relative;
-    width: 20%;
-    height: 100%;
-}
-
-#main_game > .container > .left_side > #list_players{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-#main_game > .container > .left_side > #list_players div.player{
-    width: 100%;
-    height: 100%;
-    font-size: 1.3em;
-    text-align: center;
-    display: flex;
-}
-
-#main_game > .container > .left_side > #list_players div.player .name{
-    font-weight: bold;
-    margin: 0;
-    width: 80%;
-    height: 100%;
-    color: white;
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(1) .score{
-    background-color: rgb(50, 150, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(2) .score{
-    background-color: rgb(150, 50, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(3) .score{
-    background-color: rgb(50, 50, 150);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(4) .score{
-    background-color: rgb(150, 150, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(5) .score{
-    background-color: rgb(50, 150, 150);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(6) .score{
-    background-color: rgb(150, 50, 150);
-}
-
-#main_game > .container > .left_side > #list_players div.player .score{
-    margin: 0;
-    width: 20%;
-    height: 100%;
-    color: white;
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(1) .name{
-    background-color: rgb(50, 200, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(2) .name{
-    background-color: rgb(200, 50, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(3) .name{
-    background-color: rgb(50, 50, 200);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(4) .name{
-    background-color: rgb(200, 200, 50);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(5) .name{
-    background-color: rgb(50, 200, 200);
-}
-
-#main_game > .container > .left_side > #list_players div.player:nth-child(6) .name{
-    background-color: rgb(200, 50, 200);
-}
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* RIGHT SIDE BOARD */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-#main_game > .container > .right_side{
-    padding-left: 20px;
-    width: 80%;
-    height: 100%;
-}
-
-#main_game > .container > .right_side #board{
+#game{
     padding: 20px 20px 20px 0px;
     width: 100%;
     height: 80%;
@@ -181,18 +55,18 @@ input, button{
     justify-content: space-between;
 }
 
-#main_game > .container > .right_side #board h3{
+#game h3{
     padding: 0.5em 1em;
     margin: 0;
     color: white;
     background-color: rgb(10,10,10);
 }
 
-#main_game > .container > .right_side #board p{
+#game p{
     color: rgb(200, 200, 200);
 }
 
-#main_game > .container > .right_side #board #info{
+#game #info{
     position: relative;
     height: 100%;
     width: 49%;
@@ -200,18 +74,18 @@ input, button{
     justify-content: space-between;
 }
 
-#main_game > .container > .right_side #board #info .ranking{
+#game #info .ranking{
     width: 100%;
     height: 100%;
     background-color: rgb(20, 20, 20);
 }
 
 
-#main_game > .container > .right_side #board #board_cards .bot #msg::-webkit-scrollbar {   
+#game #board_cards .bot #msg::-webkit-scrollbar {   
     display: none;
 }
 
-#main_game > .container > .right_side #board #board_cards{
+#game #board_cards{
     position: relative;
     height: 100%;
     width: 49%;
@@ -219,14 +93,14 @@ input, button{
     flex-direction: column;
 }
 
-#main_game > .container > .right_side #board #board_cards .container{
+#game #board_cards .container{
     position: relative;
     width: 100%;
     height: 40%;
 }
 
 
-#main_game > .container > .right_side #board #board_cards .card_msg{
+#game #board_cards .card_msg{
     padding: 20px 5px;
     background-color: white;
     border-radius: 10px;
@@ -234,7 +108,7 @@ input, button{
     margin-bottom: 10px;
 }
 
-#main_game > .container > .right_side #board #board_cards .cards{
+#game #board_cards .cards{
     height: 70%;
     display: flex;
     position: absolute;
@@ -243,109 +117,16 @@ input, button{
     transform: translate(-50%, -50%);
 }
 
-#main_game > .container > .right_side #board #board_cards .bot{
+#game #board_cards .bot{
     width: 100%;
     height: 60%;
     background-color: rgb(20, 20, 20);
 }
 
-#main_game > .container > .right_side #board #board_cards .bot #msg{
+#game #board_cards .bot #msg{
     padding: 0em 1em;
     width: 100%;
     height: 80%;
     overflow-y: scroll;
     scroll-behavior: smooth;
-}
-
-#main_game > .container > .right_side #board #board_cards .one_card{
-    background-color: white;
-    height: 100%;
-}
-
-
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* CLIENT*/
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-#main_game > .container > .right_side > #client{
-    background-color: rgb(20, 20, 20);
-    width: 100%;
-    box-shadow: -1px -1px 3px black;
-    height: 20%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#client #hand{
-    overflow-y: hidden;
-    width: 75%;
-    height: 100%;
-    display: flex;
-    overflow-x: scroll;
-}
-
-/* width */
-#client #hand::-webkit-scrollbar {
-    height: 8px;
-}
-  
-  /* Track */
-#client #hand::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0); 
-}
-   
-  /* Handle */
-#client #hand::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 35px;
-}
-  
-  /* Handle on hover */
-#client #hand::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-}
-
-#client #hand .one_card{
-    bottom: 0px;
-    height: 95%;
-    margin-top: 0.55%;
-    cursor: pointer;
-}
-
-#client #hand .one_card:hover{
-    margin-top: 0px;
-}
-
-
-#client #options{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 20%;
-    height: 100%;
-}
-
-#client #options .my_name{
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.3em;
-}
-
-#client #options .btn{
-    display: flex;
-    justify-content: center;
-    color: white;
-}
-
-
-#client #options .play_card > i {
-    background-color: rgb(43, 184, 43);
-    padding: 0.7em 1em;
-}
-
-#client #options .fold > i{
-    background: rgb(197, 50, 50);
-    padding: 0.7em 1em;
 }

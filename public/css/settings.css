@@ -1,0 +1,24 @@
+#settings{
+    width: 100%;
+    padding: 30px 100px;
+    background-color: rgb(40,40,40);
+}
+
+#settings h2{
+    margin: 0;
+    margin-bottom: 70px;
+    text-transform: uppercase;
+}
+
+#settings .code_party{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#settings .start_game .bad_nb_players{
+    color: rgb(219, 35, 35);
+}
+
+#settings .start_game .good_nb_players{
+    color: rgb(13, 173, 13);
+}

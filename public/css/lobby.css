@@ -1,64 +1,27 @@
 #board{
     width: 100%;
-    height: 100vh;
-    opacity: 0;
-    z-index: 2;
-    display: none;
-    transition: opacity 0.5s;
-    width: 100%;
     height: 100%;
+    opacity: 0;
+    z-index: 3;
+    display: none;
+    transition: opacity 0.5s, width 1s;
     position: relative;
     background-color: rgb(35, 35, 35);
 }
 
-/* #board .list_player{
-    background-color: rgb(20,20,20);
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    min-width: 400px;
-    display: flex;
-    flex-direction: column;
-}
-
-#board .list_player > *{
-    color: white;
-    margin: 5px auto;
-    width: 90%;
-    height: 75px;
-    line-height: 75px;
-    text-align: center;
-    font-weight: bold;
-} */
-
-#board .settings{
+#main{
+    z-index: 2;
     width: 100%;
-    background-size: cover;
-    background-color: rgb(40,40,40);
-    /* background: linear-gradient(90deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.8) 100%), url('../img/playing_cards2.jpg'); */
+    height: 100%;
+    display: flex;
 }
 
-#board .settings .code_party{
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-#board .settings .start_game .bad_nb_players{
-    color: rgb(219, 35, 35);
-}
-
-#board .settings .start_game .good_nb_players{
-    color: rgb(13, 173, 13);
-}
-
-/* SET COLORS */
-
-#board .settings .set_color .colors{
+#board #settings .set_color .colors{
     display: flex;
     margin-bottom: 140px;
 }
 
-#board .settings .set_color .colors .container {
+#board #settings .set_color .colors .container {
     position: relative;
     cursor: pointer;
     font-size: 22px;
@@ -69,14 +32,14 @@
 }
 
     /* Hide the browser's default radio button */
-#board .settings .set_color .colors .container input {
+#board #settings .set_color .colors .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
     /* Create a custom radio button */
-#board .settings .set_color .colors .checkmark {
+#board #settings .set_color .colors .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -84,72 +47,3 @@
     width: 50px;
     border-radius: 10px;
 }
-
-
-
-/* DARK MODE */
-
-#board .settings .dark_mode{
-    margin-bottom: 70px;
-}
-
-#board .settings .dark_mode .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-  
-#board .settings .dark_mode .switch input { 
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-#board .settings .dark_mode .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-#board .settings .dark_mode .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: rgb(255, 255, 255);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-#board .settings .dark_mode input:checked + .slider:before {
-    background-color: rgb(20, 20, 20);
-}
-  
-#board .settings .dark_mode input:focus + .slider {
-    box-shadow: 0 0 1px rgb(133, 133, 133);
-}
-
-  
-#board .settings .dark_mode input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-  
-  /* Rounded sliders */
-#board .settings .dark_mode .slider.round {
-    border-radius: 34px;
-}
-  
-#board .settings .dark_mode .slider.round:before {
-    border-radius: 50%;
-}  

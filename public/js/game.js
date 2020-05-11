@@ -1,18 +1,3 @@
-// function display_players_game(){
-//     $("#list_players > *").remove()
-//     my_board.get_players().forEach(p => { display_new_player(p.get_id(), p.get_name()) });
-//     $('#client > #options .my_name').text(my_player.get_name())
-// }
-
-// function display_new_player(id, name){
-//     $('#list_players').append('<div id="player_' + id + '" class="player"><p class="'+ name + ' score"><span class="nb_cards">' + '0' + '</span></p><p class="'+ name + ' name">' + name +'</p></div>')
-//     $("#list_players > *").css("line-height", (window.innerHeight*(1/my_board.get_nb_players())) + "px")
-// }
-
-function remove_player(id){
-    $('#list_players #player_' + id).remove()
-}
-
 // simple double triplet quad
 id_card_selected = []
 
@@ -25,14 +10,14 @@ function start_game(){
 }
 
 socket.on('ask_for_hand', function(){
-    $('#lobby').css('opacity', '0')
+    $('#settings').css('opacity', '0')
     setTimeout(function(){
-        $('#lobby').css('display', 'none')
-        $('#main_game').css('opacity', '1')
+        $('#settings').css('display', 'none')
+        $('#game').css('display', 'flex')
+        $('#game').css('opacity', '1')
     }, 500)
-    display_players_game()
-    $('#board > #board_cards > .cards > *').remove()
-    $('#client > #hand > *').remove()
+    $('#board_cards > .cards > *').remove()
+    $('#hand > *').remove()
     socket.emit('ask_for_hand')
 })
 
@@ -72,7 +57,7 @@ socket.on('player_jump', function(name){
 })
 
 socket.on('round_winner', function(data){
-    $('#board #board_cards .cards > *').remove()
+    $('#board_cards .cards > *').remove()
     socket.emit('update_player')
     my_player.set_fold(false)
     my_board.set_jump(false)
@@ -133,18 +118,18 @@ function display_turn(){
 }
 
 function display_card_board(){
-    $('#board #board_cards .cards > *').remove()
+    $('#board_cards .cards > *').remove()
     if(my_board.get_pot_cards().length > 0){
         my_board.get_pot_cards().forEach(card => {
-            $('#board #board_cards .cards').append('<div class="one_card" style="color:' + card.get_color() + '"> ' + card.get_name() + card.get_suit() + ' </div>')
-            $("#board #board_cards .one_card" + card.get_id()).css("line-height", (window.innerHeight*0.2) + "px")
+            $('#board_cards .cards').append('<div class="one_card" style="color:' + card.get_color() + '"> ' + card.get_name() + card.get_suit() + ' </div>')
+            $("#board_cards .one_card" + card.get_id()).css("line-height", (window.innerHeight*0.2) + "px")
             add_message_info('<span class="card_msg" style="color:' + card.get_color() + '">' + card.get_name() + ' ' + card.get_suit() + ' </span>') 
         });
     }
 }
 
 function add_message_info(msg){
-    $('#board #board_cards .bot #msg').append(msg)
+    $('#board_cards .bot #msg').append(msg)
     update_scrollbar()
 }
 
@@ -152,11 +137,12 @@ function select_card(id_card){
     if(id_card_selected.includes(id_card)){
         id_card_selected.splice(id_card_selected.indexOf(id_card), 1)
         $('#' + id_card).css('background-color', 'rgb(255,255,255)')
+        $('#' + id_card).css('margin-top', '80px')
     } else {
         id_card_selected.push(id_card)
         $('#' + id_card).css('background-color', 'rgb(215,215,215)')
+        $('#' + id_card).css('margin-top', '10px')
     }
-    console.log(id_card_selected)
 }
 
 function play_card(){

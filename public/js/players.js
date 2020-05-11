@@ -28,13 +28,15 @@ $('#players .collapse').click(function(){
         $('#players .collapse .open').css('display', 'inherit')
         $('#players').css('min-width', '30px')
         $('#players').css('max-width', '30px')
+        $('#board').css('width', (screen_width_size - 15) + 'px')
         $('#players').removeClass('open')
         $('#players').addClass('close')
     } else {
         $('#players .collapse .open').css('display', 'none')
         $('#players .collapse .close').css('display', 'inherit')
-        $('#players').css('min-width', '400px')
-        $('#players').css('max-width', '400px')
+        $('#players').css('min-width', '350px')
+        $('#players').css('max-width', '350px')
+        $('#board').css('width', (screen_width_size - 335) + 'px')
         $('#players').removeClass('close')
         $('#players').addClass('open')
     }

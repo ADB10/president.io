@@ -199,7 +199,7 @@ class Board{
         this.reset_players_hand()
         this.reset_players_turn()
         this.reset_pot()
-        this.set_starting_hands(Math.floor(8/(this.players.length)))
+        this.set_starting_hands(Math.floor(52/(this.players.length)))
         this.reset_ranking()
     }
 

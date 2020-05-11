@@ -3,7 +3,6 @@ socket.on('new_player', function(p){
     display_new_player(p)
     my_board.add_player(p)
     display_nb_players(my_board.get_nb_players())
-    console.log('np')
 })
 
 socket.on('player_disconnected', function(id){
@@ -14,9 +13,9 @@ socket.on('player_disconnected', function(id){
 
 // display and check game start
 function display_nb_players(nb) {
-    css_link = '#lobby .container .settings .start_game .nb_players'
+    css_link = '#settings .start_game .nb_players'
     $(css_link).text(nb + '')
-    css_link = '#lobby .container .settings .start_game'
+    css_link = '#settings .start_game'
     if (nb > 3) {
         $(css_link + ' button').prop("disabled", false)
         $(css_link + ' button').removeClass("disabled")

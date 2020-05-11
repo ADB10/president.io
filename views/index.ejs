@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="css/login.css">
         <link rel="stylesheet" href="css/lobby.css">
         <link rel="stylesheet" href="css/player.css">
+        <link rel="stylesheet" href="css/settings.css">
+        <link rel="stylesheet" href="css/game.css">
     </head>
 
     <body>
@@ -40,7 +42,7 @@
             </div>
         </div>
 
-        <div id="board">
+        <div id="main">
             <div id="players" class="open">
                 <div class="collapse">
                     <i class="material-icons close">chevron_left</i>
@@ -50,71 +52,55 @@
                     <h2>Code Partie | <span class="code_party"></span></h2>
                 </header>
             </div>
-            <div class="settings">
-                <h2>Paramètres</h2>
-                <!-- <div class="set_color">
-                    <h3>Choisir une couleur</h3>
-                    <div class="colors">
-                        <label class="container">
-                            <input type="radio" checked="checked" name="radio">
-                            <span class="checkmark Alpha"></span>
-                        </label>
-                        <label class="container">
-                            <input type="radio" name="radio">
-                            <span class="checkmark Beta"></span>
-                        </label>
-                        <label class="container">
-                            <input type="radio" name="radio">
-                            <span class="checkmark Gamma"></span>
-                        </label>
-                        <label class="container">
-                            <input type="radio" name="radio">
-                            <span class="checkmark Delta"></span>
-                        </label>
-                        <label class="container">
-                            <input type="radio" name="radio">
-                            <span class="checkmark Epsilon"></span>
-                        </label>
-                        <label class="container">
-                            <input type="radio" name="radio">
-                            <span class="checkmark Zeta"></span>
-                        </label>
-                    </div>
-                </div> -->
-                <!-- <div class="dark_mode">
-                    <h3>Dark mode</h3>
-                    <label class="switch">
-                        <input type="checkbox" onclick="dark_mode()">
-                        <span class="slider round"></span>
-                        </label>
-                </div> -->
-                <div class="start_game">
-                    <h3>Lancement de la partie</h3>
-                    <p>
-                        Il faut 4 joueurs minimum pour lancer une partie, vos amis peuvent vous rejoindre avec votre code de partie.<br><br>
-                        Votre code de partie est <span class="code_party"></span><br>
-                        Nombre de joueurs dans votre partie : <span class="nb_players"></span> / 6
-                    </p>
-                    <button class='disabled' onclick="start_game()" disabled>Lancer la partie</button>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <div id="main_game">
-            <div class="container">
-                <div class="left_side">
-                    <div id="list_players">
-    
+            <div id="board">
+                <div id="settings">
+                    <h2>Paramètres de partie</h2>
+                    <!-- <div class="set_color">
+                        <h3>Choisir une couleur</h3>
+                        <div class="colors">
+                            <label class="container">
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="checkmark Alpha"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Beta"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Gamma"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Delta"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Epsilon"></span>
+                            </label>
+                            <label class="container">
+                                <input type="radio" name="radio">
+                                <span class="checkmark Zeta"></span>
+                            </label>
+                        </div>
+                    </div> -->
+                    <div class="start_game">
+                        <h3>Lancement de la partie</h3>
+                        <p>
+                            Il faut 4 joueurs minimum pour lancer une partie, vos amis peuvent vous rejoindre avec votre code de partie.<br><br>
+                            Votre code de partie est <span class="code_party"></span><br>
+                            Nombre de joueurs dans votre partie : <span class="nb_players"></span> / 6
+                        </p>
+                        <button class='disabled' onclick="start_game()" disabled>Lancer la partie</button>
                     </div>
                 </div>
-                <div class="right_side">
-                    <div id="board">
+                <div id="game">
+                    <div class="top">
                         <div id="board_cards">
                             <div class="bot">
                                 <h3>Informations</h3>
                                 <div id="msg">
-
+                                    
                                 </div>
                             </div>
                             <div class="container">
@@ -126,16 +112,14 @@
                         <div id="info">
                             <div class="ranking">
                                 <h3>Classement</h3>
-                                <p>Nombre de partie <span>1</span></p>
-                                <p>Nombre de tour <span>1</span></p>
                                 <div class="places">
-
+    
                                 </div>
                             </div>
                         </div>
                     </div>
             
-                    <div id="client">
+                    <div class="bottom">
                         <div id="hand">
                             
                         </div>
@@ -168,6 +152,7 @@
         <script src="Ranking.js"></script>
         <script src="js/json_fct.js"></script>
         <script src="js/players.js"></script>
+        <script src="js/settings.js"></script>
         <script src="js/rules.js"></script>
         <script src="js/login.js"></script>
         <script src="js/lobby.js"></script>

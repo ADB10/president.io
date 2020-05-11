@@ -1,28 +1,17 @@
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-// DELARATION VARIABLES
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-my_board = new BoardClient()
-my_player = new Player(null, null, [])
-first_connection = true
+let my_board = new BoardClient()
+let my_player = new Player(null, null, [])
+let screen_width_size = $(document).width();
+let screen_height_size = $(document).height();
 
 socket = io.connect('http://localhost:8080/');
 //socket = io.connect('http://35.239.160.66/');
-
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-// LOGIN
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
 
 $(document).ready(function(){
     $('#login').css('opacity', '1')
     $('#login .left-side').css('width', '60%')
     $('#login .left-side .container').slideDown(1000)
     $('#login .right-side .container').slideDown(1000)
+    $('#board').css('width', (screen_width_size-335) + 'px')
 })
 
 audio_wow = document.getElementById('wow')
@@ -37,6 +26,8 @@ $('#lobby').css('bottom', '0px')
 $('#login').fadeOut()
 socket.emit('connection_try', (randomHex() + ''))
 */
+
+document.getElementById('pseudo').value = randomHex()
 
 $('#login .right-side .form #create_board').click(function(){
     pseudo = escapeHtml(document.getElementById('pseudo').value)
