@@ -25,9 +25,8 @@ first_connection = false
 $('#lobby').css('bottom', '0px')
 $('#login').fadeOut()
 socket.emit('connection_try', (randomHex() + ''))
-*/
-
 document.getElementById('pseudo').value = randomHex()
+*/
 
 $('#login .right-side .form #create_board').click(function(){
     pseudo = escapeHtml(document.getElementById('pseudo').value)
