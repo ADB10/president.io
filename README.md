@@ -4,8 +4,8 @@
 
 **11/05/2020**
 
-- [ ] reset les tours à chaque partie
-- [ ] bug la personne est jump apres un 2 (à determiner)
+- [x] (12/05/2020) reset les tours à chaque partie
+- [x] (12/05/2020) bug la personne est jump apres un 2 (à determiner)
 - [ ] bug finir par un deux
 - [ ] afficher la derniere carte quand la partie se termine
 
