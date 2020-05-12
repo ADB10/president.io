@@ -9,6 +9,8 @@ class Board{
         this.players = []
         this.pot = null
         this.ranking = null
+        this.round = 0
+        this.party = 0
     }
 
     get_id(){
@@ -25,6 +27,14 @@ class Board{
 
     get_pot(){
         return this.pot
+    }
+
+    get_pot_cards(){
+        return this.pot.cards
+    }
+
+    get_nb_players(){
+        return this.players.length
     }
 
     reset_pot(){
@@ -85,6 +95,10 @@ class Board{
 
     set_jump(b){
         this.jump = b
+    }
+
+    set_pot(p){
+        this.pot = p
     }
 
     set_player_turn(player){
@@ -199,8 +213,27 @@ class Board{
         this.reset_players_hand()
         this.reset_players_turn()
         this.reset_pot()
-        this.set_starting_hands(Math.floor(52/(this.players.length)))
+        this.set_starting_hands(Math.floor(8/(this.players.length)))
         this.reset_ranking()
+    }
+
+    set_score_player(){
+        this.players.forEach(p => {
+            switch(p.get_id()){
+                case this.ranking.get_pdt().get_id():
+                    p.add_to_score(2)
+                    break;
+                case this.ranking.get_vpdt().get_id():
+                    p.add_to_score(1)
+                    break;
+                case this.ranking.get_vtdc().get_id():
+                    p.add_to_score(-1)
+                    break;
+                case this.ranking.get_tdc().get_id():
+                    p.add_to_score(-2)
+                    break;
+            }
+        });
     }
 
     reset_players_fold(){

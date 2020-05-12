@@ -2,6 +2,13 @@
 
 ## TO DO LIST
 
+**11/05/2020**
+
+- [ ] reset les tours à chaque partie
+- [ ] bug la personne est jump apres un 2 (à determiner)
+- [ ] bug finir par un deux
+- [ ] afficher la derniere carte quand la partie se termine
+
 **10/05/2020**
 
 - [ ] gestion connect / deconnect entre les parties
@@ -38,6 +45,12 @@
 - [x] (27/04/2020) faire commencer le tdc
 
 ## PATCH NOTE
+
+**12/05/2020**
+
+* remove BoardClient, same Board client/server sans info carte
+* ajout système de points
+* reglages bug affichage lobby
 
 **11/05/2020**
 

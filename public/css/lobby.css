@@ -1,9 +1,7 @@
 #board{
     width: 100%;
     height: 100%;
-    opacity: 0;
     z-index: 3;
-    display: none;
     transition: opacity 0.5s, width 1s;
     position: relative;
     background-color: rgb(35, 35, 35);
@@ -13,15 +11,29 @@
     z-index: 2;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: none;
+    grid-template-columns: 350px auto;
+    transition: all 0.5s ease;
 }
 
-#board #settings .set_color .colors{
+#settings h3{
+    text-transform: uppercase;
+}
+
+#settings h3 i{
+    color: red;
+}
+
+#settings span.code_party{
+    color: red;
+}
+
+#settings .set_color .colors{
     display: flex;
     margin-bottom: 140px;
 }
 
-#board #settings .set_color .colors .container {
+#settings .set_color .colors .container {
     position: relative;
     cursor: pointer;
     font-size: 22px;
@@ -31,15 +43,14 @@
     user-select: none;
 }
 
-    /* Hide the browser's default radio button */
-#board #settings .set_color .colors .container input {
+/*
+#settings .set_color .colors .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
-    /* Create a custom radio button */
-#board #settings .set_color .colors .checkmark {
+#settings .set_color .colors .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -47,3 +58,4 @@
     width: 50px;
     border-radius: 10px;
 }
+*/

@@ -1,9 +1,3 @@
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-// DELARATION VARIABLES
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
 http = require('http');
 express = require('express');
 app = express();
@@ -18,7 +12,7 @@ eval(fs.readFileSync('./modules/server/Server.js')+'');
 eval(fs.readFileSync('./modules/server/Deck.js')+'');
 eval(fs.readFileSync('./modules/all/Ranking.js')+'');
 eval(fs.readFileSync('./modules/server/Pot.js')+'');
-eval(fs.readFileSync('./modules/server/Board.js')+'');
+eval(fs.readFileSync('./modules/all/Board.js')+'');
 eval(fs.readFileSync('./modules/all/Card.js')+'');
 eval(fs.readFileSync('./modules/all/Player.js')+'');
 eval(fs.readFileSync('./public/js/json_fct.js')+'');
@@ -28,12 +22,6 @@ io = require('socket.io').listen(server_http)
 
 server = create_server()
 
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-// CONNEXION AVEC LE CLIENT SOCKET.IO
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
 io.sockets.on('connection', function(socket) {
 
     socket.player = null // view on player
@@ -42,8 +30,8 @@ io.sockets.on('connection', function(socket) {
     function setup_socket_connection(){
         socket.join(socket.board.get_id())
         socket.emit('connected_ok', {
-            my_player: socket.player,
-            other_players: socket.board.get_players()
+            player: socket.player,
+            board: socket.board
         })
         socket.to(socket.board.get_id()).emit('new_player', socket.player)
     }
@@ -66,7 +54,9 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('disconnect', function(){
         if(socket.player != null){
+            if(socket.board.get_player_turn() != null && socket.board.get_player_turn().get_id() == socket.player.get_id()) socket.board.next_player_turn() // is his turn
             server.player_disconnected(socket.player.get_id())
+            socket.board.remove_player(socket.player.get_id())
             socket.to(socket.board.get_id()).emit('player_disconnected', socket.player.get_id())
         }
     })
@@ -91,26 +81,26 @@ io.sockets.on('connection', function(socket) {
             io.sockets.to(socket.board.get_id()).emit('card_played', {
                 id: socket.player.get_id(),
                 score: socket.player.get_hand_size(),
-                pot: socket.board.get_pot().get_pot()
+                pot: socket.board.get_pot()
             })
         } else { //end game
             socket.board.next_player_turn() // get tdc id
             socket.board.get_ranking().add_player(socket.board.get_player_turn())
             io.sockets.to(socket.board.get_id()).emit('end_game', socket.board.get_ranking())
-            socket.board.start_game() // restart game directly
-            setTimeout(function(){io.sockets.to(socket.board.get_id()).emit('ask_for_hand')}, 3000)
         }
     })
 
     socket.on('fold', function(){
-        let p = socket.player
         socket.board.next_player_turn()
         if(socket.board.is_jump()){
             socket.board.set_jump(false)
-            io.sockets.to(socket.board.get_id()).emit('player_jump', p.get_name())  
+            io.sockets.to(socket.board.get_id()).emit('player_jump', socket.player.get_name())  
         } else {
-            p.set_fold(true)
-            io.sockets.to(socket.board.get_id()).emit('player_fold', p.get_name())   
+            socket.player.set_fold(true)
+            io.sockets.to(socket.board.get_id()).emit('player_fold', {
+                name: socket.player.get_name(),
+                id: socket.player.get_id()
+            })   
         }         
     })
 
@@ -138,8 +128,8 @@ io.sockets.on('connection', function(socket) {
                 socket.board.get_pot().reset_pot()
             } else {
                 io.sockets.to(socket.board.get_id()).emit('turn', {
-                    player_turn: socket.board.get_player_turn(),
-                    pot: socket.board.get_pot().get_pot(),
+                    player_turn_id: socket.board.get_player_turn().get_id(),
+                    pot: socket.board.get_pot(),
                     is_jump: socket.board.is_jump()
                 })
             }

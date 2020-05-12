@@ -1,4 +1,4 @@
-let my_board = new BoardClient()
+let my_board = new Board(null)
 let my_player = new Player(null, null, [])
 let screen_width_size = $(document).width();
 let screen_height_size = $(document).height();
@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('#login .left-side').css('width', '60%')
     $('#login .left-side .container').slideDown(1000)
     $('#login .right-side .container').slideDown(1000)
-    $('#board').css('width', (screen_width_size-335) + 'px')
+    $('#historic').css('height', (screen_height_size-300) + 'px')
 })
 
 audio_wow = document.getElementById('wow')
@@ -57,17 +57,10 @@ socket.on('connection_failed', function(){
 })
 
 socket.on('connected_ok', function(data){
-    $('#login').css('opacity', '0')
-    $('#board').css('display', 'flex')
-    setTimeout(function(){
-        $('#login').css('display', 'none')
-        $('#board').css('opacity', '1')
-    }, 500)
-    my_player = JSON_parse_player(data.my_player)
-    data.other_players.forEach(p => {
-        p = JSON_parse_player(p)
-        if(my_player.get_id() != p.get_id()) my_board.add_player(p)
-    });
-    my_board.add_player(my_player)
+    animation_transition('login', 'main', 'grid')
+    my_board = JSON_parse_board(data.board)
+    my_player = my_board.get_player_by_id(data.player.id) // view on player in board
+    display_nb_players()
+    check_game_possible()
     display_players_first_connection()
 })

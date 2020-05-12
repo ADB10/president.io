@@ -1,22 +1,22 @@
-socket.on('new_player', function(p){
-    p = JSON_parse_player(p)
-    display_new_player(p)
+socket.on('new_player', function(player){
+    let p = JSON_parse_player(player)
     my_board.add_player(p)
-    display_nb_players(my_board.get_nb_players())
+    display_new_player(p)
+    display_nb_players()
+    check_game_possible()
 })
 
 socket.on('player_disconnected', function(id){
-    display_remove_player(id)
     my_board.remove_player(id)
-    display_nb_players(my_board.get_nb_players())
+    display_remove_player(id)
+    display_nb_players()
+    check_game_possible()
 })
 
 // display and check game start
-function display_nb_players(nb) {
-    css_link = '#settings .start_game .nb_players'
-    $(css_link).text(nb + '')
+function check_game_possible(){
     css_link = '#settings .start_game'
-    if (nb > 3) {
+    if (my_board.players.length > 3) {
         $(css_link + ' button').prop("disabled", false)
         $(css_link + ' button').removeClass("disabled")
         $(css_link + ' p > span').removeClass('bad_nb_players')

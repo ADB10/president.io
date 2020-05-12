@@ -10,6 +10,7 @@ class Player {
         this.ranked = false
         this.connected = false
         this.id_board = null
+        this.score = 0
     }
 
     set_hand(hand){
@@ -26,6 +27,10 @@ class Player {
 
     set_id(id){
         this.id = id
+    }
+
+    set_my_turn(b){
+        this.my_turn = b
     }
 
     set_name(name){
@@ -56,6 +61,10 @@ class Player {
         return this.id_board
     }
 
+    get_score(){
+        return this.score
+    }
+
     get_card_by_id(id){
         let res = null
         this.hand.forEach(c => {
@@ -78,8 +87,8 @@ class Player {
         return this.my_turn
     }
 
-    set_my_turn(b){
-        this.my_turn = false
+    add_to_score(pts){
+        this.score += pts
     }
 
     toggle_my_turn(){

@@ -10,12 +10,9 @@ function start_game(){
 }
 
 socket.on('ask_for_hand', function(){
-    $('#settings').css('opacity', '0')
-    setTimeout(function(){
-        $('#settings').css('display', 'none')
-        $('#game').css('display', 'flex')
-        $('#game').css('opacity', '1')
-    }, 500)
+    animation_transition('settings','game', 'grid')
+    display_all_player_in_game()
+    id_card_selected = []
     $('#board_cards > .cards > *').remove()
     $('#hand > *').remove()
     socket.emit('ask_for_hand')
@@ -24,35 +21,36 @@ socket.on('ask_for_hand', function(){
 socket.on('your_hand', function(player){
     my_player = JSON_parse_player(player)
     display_hand()
-    $('.nb_cards').text(my_player.get_hand_size() + '')
+    $('#players .nb_cards').text(my_player.get_hand().length)
     socket.emit('get_turn')
 })
 
 socket.on('turn', function(data){
-    my_board.set_pot(data.pot)
-    my_board.set_player_turn(data.player_turn)
+    my_board.set_pot(JSON_parse_pot(data.pot))
+    my_board.set_player_turn(my_board.get_player_by_id(data.player_turn_id))
     my_board.set_jump(data.is_jump)
     if(my_board.get_player_turn().get_id() == my_player.get_id()){ // if my turn
-        my_player.toggle_my_turn()
+        my_player.set_my_turn(true)
         audio_turn.play()
     }
     display_turn()
 })
 
 socket.on('card_played', function(data){
-    $('#player_' + data.id + ' .score .nb_cards').text(data.score + '')
-    my_board.set_pot(data.pot)
+    my_board.set_pot(JSON_parse_pot(data.pot))
+    display_nb_cards_player(data.id, data.score)
     display_card_board()
     socket.emit('get_turn')
 })
 
-socket.on('player_fold', function(name){
-    add_message_info('<p><b>' + name + "</b> vient de passer son tour.<p>")
+socket.on('player_fold', function(data){
+    display_player_sleep(data.id)
+    add_message_historic('<span class="action"> se couche</span>')
     socket.emit('get_turn')
 })
 
 socket.on('player_jump', function(name){
-    add_message_info("<p><b>" + name + "</b> s'est fait swip par " + my_board.get_pot_player().get_name() + ".<p>")
+    add_message_historic('<span class="action"> s\'est fait sweep</span>')
     socket.emit('get_turn')
 })
 
@@ -65,13 +63,9 @@ socket.on('round_winner', function(data){
     let c = JSON_parse_card(data.cards[0])
     if(data.is_pdt){
         audio_wow.play()
-        add_message_info('<p><b>' + data.winner_pseudo + '</b> remporte le tour et devient président.</p>')
+        add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> devient président')
     } else {
-        if(c.get_weight() == 1){
-            add_message_info('<p></b>' + data.winner_pseudo + '</b> remporte le tour en placant un 2.</p>')
-        } else {
-            add_message_info('<p><b>' + data.winner_pseudo + '</b> remporte le tour.</p>')
-        }
+        add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> remporte le tour')
     }
     socket.emit('get_turn')
 })
@@ -79,15 +73,17 @@ socket.on('round_winner', function(data){
 socket.on('end_game', function(ranking){
     ranking = JSON_parse_ranking(ranking)
     my_board.incr_party()
-    $('#info .places > *').remove()
-    display_places('<p>La partie ' + my_board.get_party() + ' vient de se terminer en ' + my_board.get_round() + ' tours</p>')
-    display_places('<p><span style="color:white; background-color: #FFD700">LE PRESIDENT</span> <b>' + ranking.get_pdt().get_name() + '</b></p>')
-    display_places('<p><span style="color:white; background-color: #888888">LE VICE PRESIDENT</span> <b>' + ranking.get_vpdt().get_name() + '</b></p>')
+    $('#settings .ranking .content > *').remove()
+    $('#settings .ranking .content').append('<p>La partie ' + my_board.get_party() + ' vient de se terminer en ' + my_board.get_round() + ' tours</p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #FFD700">LE PRESIDENT</span> <b>' + ranking.get_pdt().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #888888">LE VICE PRESIDENT</span> <b>' + ranking.get_vpdt().get_name() + '</b></p>')
     ranking.get_neutrals().forEach(p => {
-        display_places('<p><span style="color:white; background-color: blue">LE NEUTRE</span> <b>' + p.get_name() + '</b></p>')
+        $('#settings .ranking .content').append('<p><span style="color:white; background-color: blue">LE NEUTRE</span> <b>' + p.get_name() + '</b></p>')
     })
-    display_places('<p><span style="color:white; background-color: #D2691E">LE VICE TROU DU CUL</span> <b>' + ranking.get_vtdc().get_name() + '</b></p>')
-    display_places('<p><span style="color:white; background-color: #A52A2A">LE TROU DU CUL</span> <b>' + ranking.get_tdc().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #D2691E">LE VICE TROU DU CUL</span> <b>' + ranking.get_vtdc().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #A52A2A">LE TROU DU CUL</span> <b>' + ranking.get_tdc().get_name() + '</b></p>')
+    my_board.round = 0
+    animation_transition('game', 'settings', 'inherit')
 })
 
 function display_places(msg){
@@ -112,24 +108,24 @@ function display_hand(){
 }
 
 function display_turn(){
-    $('.player > .name').css('width', '80%')
-    $('#player_' + my_board.get_player_turn().get_id() + ' .name').css('width', '70%')
-    add_message_info('<p>C\'est au tour de <b>' + my_board.get_player_turn().get_name() + '<b></p>')
+    add_message_historic('<span class="player">' + my_board.get_player_turn().get_name() + '</span>')
 }
 
 function display_card_board(){
     $('#board_cards .cards > *').remove()
     if(my_board.get_pot_cards().length > 0){
+        let cards_text = ''
         my_board.get_pot_cards().forEach(card => {
             $('#board_cards .cards').append('<div class="one_card" style="color:' + card.get_color() + '"> ' + card.get_name() + card.get_suit() + ' </div>')
             $("#board_cards .one_card" + card.get_id()).css("line-height", (window.innerHeight*0.2) + "px")
-            add_message_info('<span class="card_msg" style="color:' + card.get_color() + '">' + card.get_name() + ' ' + card.get_suit() + ' </span>') 
+            cards_text += '<span class="card_msg" style="color:' + card.get_color() + '">' + card.get_name() + ' ' + card.get_suit() + ' </span>'
         });
+        add_message_historic('<div class="action" style="display:flex">' + cards_text + '</div>')
     }
 }
 
-function add_message_info(msg){
-    $('#board_cards .bot #msg').append(msg)
+function add_message_historic(msg){
+    $('#historic .content').append(msg)
     update_scrollbar()
 }
 
@@ -154,7 +150,7 @@ function play_card(){
         if (((!my_board.is_jump() && check_play_possible(card_selected, my_board.get_pot_cards())) || (my_board.is_jump() && check_jump_play_possible(card_selected, my_board.get_pot_cards())))) {
             socket.emit("play_cards", card_selected)
             socket.emit("update_player")
-            my_player.toggle_my_turn()
+            my_player.set_my_turn(false)
             remove_cards()
         }
     } else {
@@ -172,7 +168,7 @@ function remove_cards(){
 function fold(){
     if (my_player.is_my_turn()) {
         my_player.set_fold(true)
-        my_player.toggle_my_turn()
+        my_player.set_my_turn(false)
         socket.emit("fold")
     } else {
         console.log('Error (fold): not your turn')
@@ -180,6 +176,6 @@ function fold(){
 }
 
 function update_scrollbar(){
-    objDiv = document.getElementById("msg")
+    objDiv = document.getElementById("content_historic")
     objDiv.scrollTop = objDiv.scrollHeight;
 }

@@ -1,4 +1,5 @@
 class Ranking{
+    
     constructor(nb_players){
         this.pdt = null
         this.vpdt = null

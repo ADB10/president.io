@@ -5,8 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>president.io</title>
+        <link rel="icon" href="favicon.ico"/>
         <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/login.css">
         <link rel="stylesheet" href="css/lobby.css">
@@ -49,12 +51,23 @@
                     <i class="material-icons open">group</i>
                 </div>
                 <header>
-                    <h2>Code Partie | <span class="code_party"></span></h2>
+                    <h2><span class="nb_players"></span> Joueurs | <span class="code_party"></span></h2>
                 </header>
+                <div class="list_players">
+
+                </div>
             </div>
             <div id="board">
                 <div id="settings">
-                    <h2>Paramètres de partie</h2>
+                    <h2>Paramètres de partie | CODE <span class="code_party"></span></h2>
+                    <div class="ranking">
+                        <h3><i class='fas fa-trophy'></i> | Résultats dernière partie</h3>
+                        <div class="content">
+                            <p>
+                                Pas de classement pour le moment.
+                            </p>
+                        </div>
+                    </div>
                     <!-- <div class="set_color">
                         <h3>Choisir une couleur</h3>
                         <div class="colors">
@@ -85,11 +98,9 @@
                         </div>
                     </div> -->
                     <div class="start_game">
-                        <h3>Lancement de la partie</h3>
+                        <h3 style="margin-top: 50px;"><i class='far fa-play-circle'></i> | Lancer une partie</h3>
                         <p>
-                            Il faut 4 joueurs minimum pour lancer une partie, vos amis peuvent vous rejoindre avec votre code de partie.<br><br>
-                            Votre code de partie est <span class="code_party"></span><br>
-                            Nombre de joueurs dans votre partie : <span class="nb_players"></span> / 6
+                            Il faut 4 joueurs minimum pour lancer une partie, vos amis peuvent vous rejoindre avec votre code de partie.
                         </p>
                         <button class='disabled' onclick="start_game()" disabled>Lancer la partie</button>
                     </div>
@@ -109,12 +120,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="info">
-                            <div class="ranking">
-                                <h3>Classement</h3>
-                                <div class="places">
-    
-                                </div>
+                        <div id="historic">
+                            <h2>Historique</h2>
+                            <div id="content_historic" class="content">
+
                             </div>
                         </div>
                     </div>
@@ -146,7 +155,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="BoardClient.js"></script>
+        <script src="Board.js"></script>
         <script src="Card.js"></script>
         <script src="Player.js"></script>
         <script src="Ranking.js"></script>
