@@ -8,7 +8,8 @@ function JSON_parse_cards(cards){
 
 function JSON_parse_pot(pot){
     let p = create_pot()
-    p.player = JSON_parse_player(pot.player)
+    if(pot.player != null) p.player = JSON_parse_player(pot.player)
+    else p.player = null
     p.cards = JSON_parse_cards(pot.cards)
     p.historic = JSON_parse_cards(pot.historic)
     p.empty = pot.empty
@@ -24,7 +25,8 @@ function JSON_parse_board(board){
     b.deck = null
     b.players = JSON_parse_players(board.players)
     b.pot = null
-    b.ranking = null
+    if(board.ranking != null) b.ranking = JSON_parse_ranking(board.ranking)
+    else b.ranking = null
     b.round = board.round
     b.party = board.party
     return b

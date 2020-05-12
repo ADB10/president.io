@@ -33,6 +33,14 @@ class Board{
         return this.pot.cards
     }
 
+    get_party(){
+        return this.party
+    }
+
+    get_round(){
+        return this.round
+    }
+
     get_nb_players(){
         return this.players.length
     }
@@ -107,6 +115,14 @@ class Board{
 
     add_player(p){
         this.players.push(p)
+    }
+
+    incr_round(){
+        this.round++
+    }
+
+    incr_party(){
+        this.party++
     }
 
     remove_player(id){

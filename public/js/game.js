@@ -60,7 +60,6 @@ socket.on('round_winner', function(data){
     my_player.set_fold(false)
     my_board.set_jump(false)
     my_board.incr_round()
-    let c = JSON_parse_card(data.cards[0])
     if(data.is_pdt){
         audio_wow.play()
         add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> devient président')
@@ -70,19 +69,20 @@ socket.on('round_winner', function(data){
     socket.emit('get_turn')
 })
 
-socket.on('end_game', function(ranking){
-    ranking = JSON_parse_ranking(ranking)
+socket.on('end_game', function(board){
+    my_board = JSON_parse_board(board)
     my_board.incr_party()
     $('#settings .ranking .content > *').remove()
     $('#settings .ranking .content').append('<p>La partie ' + my_board.get_party() + ' vient de se terminer en ' + my_board.get_round() + ' tours</p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #FFD700">LE PRESIDENT</span> <b>' + ranking.get_pdt().get_name() + '</b></p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #888888">LE VICE PRESIDENT</span> <b>' + ranking.get_vpdt().get_name() + '</b></p>')
-    ranking.get_neutrals().forEach(p => {
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #FFD700">LE PRESIDENT</span> <b>' + my_board.get_ranking().get_pdt().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #888888">LE VICE PRESIDENT</span> <b>' + my_board.get_ranking().get_vpdt().get_name() + '</b></p>')
+    my_board.get_ranking().get_neutrals().forEach(p => {
         $('#settings .ranking .content').append('<p><span style="color:white; background-color: blue">LE NEUTRE</span> <b>' + p.get_name() + '</b></p>')
     })
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #D2691E">LE VICE TROU DU CUL</span> <b>' + ranking.get_vtdc().get_name() + '</b></p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #A52A2A">LE TROU DU CUL</span> <b>' + ranking.get_tdc().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #D2691E">LE VICE TROU DU CUL</span> <b>' + my_board.get_ranking().get_vtdc().get_name() + '</b></p>')
+    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #A52A2A">LE TROU DU CUL</span> <b>' + my_board.get_ranking().get_tdc().get_name() + '</b></p>')
     my_board.round = 0
+    set_score()
     animation_transition('game', 'settings', 'inherit')
 })
 

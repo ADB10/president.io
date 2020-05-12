@@ -3,18 +3,17 @@ express = require('express');
 app = express();
 
 app.get('/', function(req, res) { res.render('index.ejs') })
-.use(express.static(__dirname + '/modules/client'))
-.use(express.static(__dirname + '/modules/all'))
+.use(express.static(__dirname + '/modules'))
 .use(express.static(__dirname + '/public'));
 
 var fs = require('fs');
-eval(fs.readFileSync('./modules/server/Server.js')+'');
-eval(fs.readFileSync('./modules/server/Deck.js')+'');
-eval(fs.readFileSync('./modules/all/Ranking.js')+'');
-eval(fs.readFileSync('./modules/server/Pot.js')+'');
-eval(fs.readFileSync('./modules/all/Board.js')+'');
-eval(fs.readFileSync('./modules/all/Card.js')+'');
-eval(fs.readFileSync('./modules/all/Player.js')+'');
+eval(fs.readFileSync('./modules/Server.js')+'');
+eval(fs.readFileSync('./modules/Deck.js')+'');
+eval(fs.readFileSync('./modules/Ranking.js')+'');
+eval(fs.readFileSync('./modules/Pot.js')+'');
+eval(fs.readFileSync('./modules/Board.js')+'');
+eval(fs.readFileSync('./modules/Card.js')+'');
+eval(fs.readFileSync('./modules/Player.js')+'');
 eval(fs.readFileSync('./public/js/json_fct.js')+'');
 
 server_http = http.createServer(app)
@@ -86,7 +85,8 @@ io.sockets.on('connection', function(socket) {
         } else { //end game
             socket.board.next_player_turn() // get tdc id
             socket.board.get_ranking().add_player(socket.board.get_player_turn())
-            io.sockets.to(socket.board.get_id()).emit('end_game', socket.board.get_ranking())
+            socket.board.set_score_player()
+            io.sockets.to(socket.board.get_id()).emit('end_game', socket.board)
         }
     })
 
@@ -138,5 +138,5 @@ io.sockets.on('connection', function(socket) {
 
 })
 
-server_http.listen(80)
+server_http.listen(8080)
  
