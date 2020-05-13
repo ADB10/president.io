@@ -34,3 +34,20 @@ function animation_transition(e1, e2, display){
         $('#' + e2).css('opacity', '1')
     }, 500)
 }
+
+let historic_interface_open = true
+
+$('#historic .collapse').click(function(){
+    if(historic_interface_open){
+        $('#game').css('grid-template-columns', 'auto 35px')
+        $('#historic > *:not(:first-child)').css('display', 'none')
+        $('#historic i.close').css('display', 'none')
+        $('#historic i.open').css('display', 'inherit')
+    } else {
+        $('#game').css('grid-template-columns', 'auto 400px')
+        $('#historic > *:not(:first-child)').css('display', 'grid')
+        $('#historic i.close').css('display', 'inherit')
+        $('#historic i.open').css('display', 'none')
+    }
+    historic_interface_open = !historic_interface_open
+})

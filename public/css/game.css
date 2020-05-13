@@ -2,17 +2,17 @@
     width: 100%;
     height: 100%;
     display: none;
-    grid-template-rows: auto 300px;
+    grid-template-columns: auto 400px;
 }
 
-#game .top{
+#game #board{
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: auto 450px;
+    grid-template-rows: auto 50px 300px;
 }
 
-#game .top #board_cards{
+#game #board #board_cards{
     width: 100%;
     height: 100%;
     display: grid;
@@ -33,17 +33,50 @@
 }
 
 #game #historic{
+    z-index: 4;
     height: 100%;
+    position: relative;
     background-color: rgb(20,20,20);
     color: rgb(240,240,240);
     display: flex;
     flex-direction: column;
 }
 
+#game #historic .collapse{
+    position: absolute;
+    left: -25px;
+    top: 20px;
+    color: white;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+    z-index: 5;
+    background-color: rgb(20,20,20);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+#game #historic .collapse:hover{
+    background-color: rgb(10,10,10);
+}
+
+#game #historic .collapse i{
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 35px;
+}
+
+#game #historic .collapse .close{
+    font-size: 50px;
+}
+
+
 #game #historic h2{
     font-size: 25px;
     text-transform: uppercase;
-    margin: 30px 0px 50px 30px;
+    margin: 30px 0px 40px 70px;
 }
 
 #game #historic .card_msg{
@@ -74,80 +107,82 @@
     display: none;
 }
 
-#game .bottom{
+#game #board #hand{
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
-
-#game .bottom #hand{
     height: 100%;
-    width: 75%;
     display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
 }
 
-#game .bottom .one_card{
+#game #board #hand .one_card{
     margin-top: 80px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
-#game .bottom .one_card:hover{
+#game #board #hand .one_card:hover{
     margin-top: 66px;
     cursor: pointer;
 }
 
-#game .bottom #hand::-webkit-scrollbar {
+#game #board #hand::-webkit-scrollbar {
     height: 8px;
 }
 
-#game .bottom #hand::-webkit-scrollbar-track {
+#game #board #hand::-webkit-scrollbar-track {
     background: rgba(0,0,0,0); 
 }
 
-#game .bottom #hand::-webkit-scrollbar-thumb {
+#game #board #hand::-webkit-scrollbar-thumb {
     background: #888; 
     border-radius: 35px;
 }
 
-#game .bottom #hand::-webkit-scrollbar-thumb:hover {
+#game #board #hand::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
 
-#game .bottom #options{
+#game #board #options{
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     height: 100%;
-    width: 20%;
+    width: 100%;
 }
 
-#game .bottom #options .my_name{
+#game #board #options .my_name{
     margin: 0;
     font-weight: bold;
 }
 
-#game .bottom #options .btn{
+#game #board #options .btn{
+    height: 50px;
+    min-width: 250px;
     display: flex;
     justify-content: center;
     color: white;
 }
 
-#game .bottom #options .play_card > i {
+#game #board #options .btn > i{
+    min-width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+#game #board #options .play_card > i {
     background-color: rgb(43, 184, 43);
 }
 
-#game .bottom #options .fold > i{
+#game #board #options .fold > i{
     background: rgb(197, 50, 50);
 }
 
-#game .bottom #options .play_card > button{
+#game #board #options .play_card > button{
     background-color: rgb(50, 218, 50) !important;
 }
 
-#game .bottom #options .fold > button{
+#game #board #options .fold > button{
     background: rgb(231, 53, 53) !important;
 }
 

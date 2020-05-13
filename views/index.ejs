@@ -106,7 +106,8 @@
                     </div>
                 </div>
                 <div id="game">
-                    <div class="top">
+
+                    <div id="board">
                         <div id="board_cards">
                             <div class="bot">
                                 <h3>Informations</h3>
@@ -120,30 +121,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="historic">
-                            <h2>Historique</h2>
-                            <div id="content_historic" class="content">
-
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="bottom">
-                        <div id="hand">
-                            
-                        </div>
                         <div id="options">
                             <p class="my_name"></p>
-                            <div class="btn play_card">
-                                <i class="material-icons" style="vertical-align:bottom">arrow_upward</i>
-                                <button id="play_this_card" onclick="play_card()">Jouer ces cartes</button>
-                            </div>
                             <div class="btn fold">
                                 <i class="material-icons" style="vertical-align:bottom">pan_tool</i>
                                 <button id="fold" onclick="fold()">Passer son tour</button>
                             </div>
+                            <div class="btn play_card">
+                                <i class="material-icons" style="vertical-align:bottom">arrow_upward</i>
+                                <button id="play_this_card" onclick="play_card()">Jouer ces cartes</button>
+                            </div>
+                        </div>
+                        <div id="hand">
+
                         </div>
                     </div>
+            
+                    <div id="historic">
+                        <div class="collapse">
+                            <i class="material-icons close">chevron_right</i>
+                            <i class="material-icons open" style="display: none;">history</i>
+                        </div>
+                        <h2>Historique | Partie 1</h2>
+                        <div id="content_historic" class="content">
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

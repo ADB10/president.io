@@ -2,11 +2,15 @@
 
 ## TO DO LIST
 
+**12/05/2020**
+
+- [ ] ajout IA
+
 **11/05/2020**
 
 - [x] (12/05/2020) reset les tours à chaque partie
 - [x] (12/05/2020) bug la personne est jump apres un 2 (à determiner)
-- [ ] bug finir par un deux
+- [ ] bug finir par un deux (à determiner)
 - [ ] afficher la derniere carte quand la partie se termine
 
 **10/05/2020**

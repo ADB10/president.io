@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('#login .left-side').css('width', '60%')
     $('#login .left-side .container').slideDown(1000)
     $('#login .right-side .container').slideDown(1000)
-    $('#historic').css('height', (screen_height_size-300) + 'px')
+    $('#content_historic').css('height', (screen_height_size-100) + 'px')
 })
 
 audio_wow = document.getElementById('wow')

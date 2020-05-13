@@ -32,14 +32,36 @@ function display_all_player_in_game(){
     });
 }
 
+function display_state_after_round_winner(){
+    my_board.players.forEach(p => {
+        if(p.is_ranked()){
+            display_player_ranked(p.get_id())
+        } else {
+            if(p.is_fold()){
+                display_player_in_game(p.get_id())
+            }
+        }
+    });
+}
+
 function display_player_in_game(id){
     $('#player_' + id + ' div.state > i').text('play_circle_outline')
     $('#player_' + id + ' div.state > p').text('en jeu')
 }
 
 function display_player_sleep(id){
-    $('#player_' + id + ' div.state > i').text('brightness_3')
+    $('#player_' + id + ' div.state > i').text('pan_tool')
     $('#player_' + id + ' div.state > p').text('couché')
+}
+
+function display_player_ranked(id){
+    $('#player_' + id + ' div.state > i').text('check')
+    $('#player_' + id + ' div.state > p').text('terminé')
+}
+
+function display_player_sweep(id){
+    $('#player_' + id + ' div.state > i').text('clear')
+    $('#player_' + id + ' div.state > p').text('sweep')
 }
 
 function display_remove_player(id){
@@ -51,7 +73,14 @@ function display_nb_players(){
 }
 
 function display_nb_cards_player(id, nb){
-    $('#player_' + id + ' .cards .nb_cards > span').text(nb)
+    if(nb < 10){
+        $('#player_' + id + ' .cards > i').text('filter_' + nb)
+        $('#player_' + id + ' .cards .nb_cards > span').text(nb)
+    } else {
+        $('#player_' + id + ' .cards > i').text('filter_9_plus')
+        $('#player_' + id + ' .cards .nb_cards > span').text(nb)
+    }
+    
 }
 
 function set_score(){

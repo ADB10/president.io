@@ -1,5 +1,5 @@
 // simple double triplet quad
-id_card_selected = []
+let id_card_selected = []
 
 function start_game(){
     if(my_board.get_nb_players() > 3){
@@ -18,10 +18,10 @@ socket.on('ask_for_hand', function(){
     socket.emit('ask_for_hand')
 })
 
-socket.on('your_hand', function(player){
-    my_player = JSON_parse_player(player)
+socket.on('your_hand', function(hand){
+    my_player.set_hand(JSON_parse_cards(hand))
     display_hand()
-    $('#players .nb_cards').text(my_player.get_hand().length)
+    $('#players .nb_cards > span').text(my_player.get_hand().length)
     socket.emit('get_turn')
 })
 
@@ -43,13 +43,14 @@ socket.on('card_played', function(data){
     socket.emit('get_turn')
 })
 
-socket.on('player_fold', function(data){
-    display_player_sleep(data.id)
+socket.on('player_fold', function(id_player){
+    display_player_sleep(id_player)
     add_message_historic('<span class="action"> se couche</span>')
     socket.emit('get_turn')
 })
 
-socket.on('player_jump', function(name){
+socket.on('player_jump', function(id_player){
+    display_player_sweep(id_player)
     add_message_historic('<span class="action"> s\'est fait sweep</span>')
     socket.emit('get_turn')
 })
@@ -60,28 +61,22 @@ socket.on('round_winner', function(data){
     my_player.set_fold(false)
     my_board.set_jump(false)
     my_board.incr_round()
+    if(data.is_ranked) my_board.get_player_by_id(data.winner_id).set_ranked(true)
     if(data.is_pdt){
         audio_wow.play()
         add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> devient président')
     } else {
         add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> remporte le tour')
     }
+    display_state_after_round_winner()
     socket.emit('get_turn')
 })
 
 socket.on('end_game', function(board){
     my_board = JSON_parse_board(board)
-    my_board.incr_party()
-    $('#settings .ranking .content > *').remove()
-    $('#settings .ranking .content').append('<p>La partie ' + my_board.get_party() + ' vient de se terminer en ' + my_board.get_round() + ' tours</p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #FFD700">LE PRESIDENT</span> <b>' + my_board.get_ranking().get_pdt().get_name() + '</b></p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #888888">LE VICE PRESIDENT</span> <b>' + my_board.get_ranking().get_vpdt().get_name() + '</b></p>')
-    my_board.get_ranking().get_neutrals().forEach(p => {
-        $('#settings .ranking .content').append('<p><span style="color:white; background-color: blue">LE NEUTRE</span> <b>' + p.get_name() + '</b></p>')
-    })
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #D2691E">LE VICE TROU DU CUL</span> <b>' + my_board.get_ranking().get_vtdc().get_name() + '</b></p>')
-    $('#settings .ranking .content').append('<p><span style="color:white; background-color: #A52A2A">LE TROU DU CUL</span> <b>' + my_board.get_ranking().get_tdc().get_name() + '</b></p>')
+    display_ranking(my_board.get_ranking(), my_board.get_party(), my_board.get_round())
     my_board.round = 0
+    my_board.reset_ranking()
     set_score()
     animation_transition('game', 'settings', 'inherit')
 })
@@ -91,7 +86,7 @@ function display_places(msg){
 }
 
 socket.on('update_player', function(p){
-    my_player = JSON_parse_player(p)
+    my_player.set_ranked(p.ranked)
 })
 
 function display_hand(){

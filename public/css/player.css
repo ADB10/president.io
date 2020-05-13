@@ -77,7 +77,7 @@
 #players header h2{
     font-size: 25px;
     text-transform: uppercase;
-    margin: 30px 0px 70px 30px;
+    margin: 30px 0px 30px 50px;
 }
 
 #players header span.nb_players{

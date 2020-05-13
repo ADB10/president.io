@@ -23,8 +23,8 @@ server = create_server()
 
 io.sockets.on('connection', function(socket) {
 
-    socket.player = null // view on player
-    socket.board = null // view on board
+    socket.player = null // view on player of board
+    socket.board = null // view on board of server
 
     function setup_socket_connection(){
         socket.join(socket.board.get_id())
@@ -53,7 +53,14 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('disconnect', function(){
         if(socket.player != null){
-            if(socket.board.get_player_turn() != null && socket.board.get_player_turn().get_id() == socket.player.get_id()) socket.board.next_player_turn() // is his turn
+            if(socket.board.get_player_turn() != null && socket.board.get_player_turn().get_id() == socket.player.get_id()){
+                socket.board.next_player_turn() // is his turn
+                io.sockets.to(socket.board.get_id()).emit('turn', {
+                    player_turn_id: socket.board.get_player_turn().get_id(),
+                    pot: socket.board.get_pot(),
+                    is_jump: socket.board.is_jump()
+                })
+            } 
             server.player_disconnected(socket.player.get_id())
             socket.board.remove_player(socket.player.get_id())
             socket.to(socket.board.get_id()).emit('player_disconnected', socket.player.get_id())
@@ -66,7 +73,7 @@ io.sockets.on('connection', function(socket) {
     })
 
     socket.on('ask_for_hand', function(){
-        socket.emit('your_hand', socket.player)
+        socket.emit('your_hand', socket.player.get_hand())
     })
 
     socket.on('play_cards', function(cards){
@@ -86,6 +93,7 @@ io.sockets.on('connection', function(socket) {
             socket.board.next_player_turn() // get tdc id
             socket.board.get_ranking().add_player(socket.board.get_player_turn())
             socket.board.set_score_player()
+            socket.board.incr_party()
             io.sockets.to(socket.board.get_id()).emit('end_game', socket.board)
         }
     })
@@ -94,13 +102,10 @@ io.sockets.on('connection', function(socket) {
         socket.board.next_player_turn()
         if(socket.board.is_jump()){
             socket.board.set_jump(false)
-            io.sockets.to(socket.board.get_id()).emit('player_jump', socket.player.get_name())  
+            io.sockets.to(socket.board.get_id()).emit('player_jump', socket.player.get_id())  
         } else {
             socket.player.set_fold(true)
-            io.sockets.to(socket.board.get_id()).emit('player_fold', {
-                name: socket.player.get_name(),
-                id: socket.player.get_id()
-            })   
+            io.sockets.to(socket.board.get_id()).emit('player_fold', socket.player.get_id())   
         }         
     })
 
@@ -114,6 +119,7 @@ io.sockets.on('connection', function(socket) {
                 io.sockets.to(socket.board.get_id()).emit('round_winner', {
                     winner_pseudo: socket.board.get_round_winner().get_name(),
                     winner_id: socket.board.get_round_winner().get_id(),
+                    is_ranked: socket.board.get_round_winner().is_ranked(),
                     is_pdt: (socket.board.get_ranking().get_pdt() != null && socket.board.get_ranking().get_pdt().get_id() == socket.board.get_round_winner().get_id()),
                     cards: socket.board.get_pot().get_cards()
                 })
