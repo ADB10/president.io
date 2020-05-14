@@ -121,8 +121,7 @@ io.sockets.on('connection', function(socket) {
             }
 
             // end party
-            if(socket.board.get_ranking().get_nb_ranked() == (socket.board.get_players().length-1)){
-                socket.board.next_player_turn() // get tdc id
+            if(socket.board.get_ranking().get_nb_ranked() >= (socket.board.get_players().length-1)){
                 socket.board.get_ranking().add_player(socket.board.get_player_turn())
                 socket.board.set_score_player()
                 socket.board.incr_party()

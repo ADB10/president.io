@@ -13,9 +13,9 @@ socket.on('ask_for_hand', function(){
     animation_transition('settings','game', 'grid')
     display_all_player_in_game()
     id_card_selected = []
-    $('#board_cards > .container > *').remove()
+    $('#board_cards > .container > .cards > *').remove()
     $('#hand > *').remove()
-    $('#historic_content > *').remove()
+    $('#content_historic > *').remove()
     socket.emit('ask_for_hand')
 })
 
@@ -78,7 +78,7 @@ socket.on('end_game', function(board){
     my_board.round = 0
     my_board.reset_ranking()
     set_score()
-    animation_transition('game', 'settings', 'inherit')
+    setTimeout(function(){animation_transition('game', 'settings', 'inherit')}, 3000)
 })
 
 function display_places(msg){

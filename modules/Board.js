@@ -175,7 +175,7 @@ class Board{
                 this.round_winner = this.pot.get_player()
                 return true
             } else {
-                if(this.ranking.get_nb_ranked() == 1 && this.pot.get_player().get_id() == this.ranking.get_pdt().get_id()){ // dont play after pdt
+                if(this.ranking.get_nb_ranked() == 1 && this.ranking.get_pdt() != null && this.pot.get_player().get_id() == this.ranking.get_pdt().get_id()){ // dont play after pdt
                     this.round_winner = this.pot.get_player()
                     return true
                 } else {

@@ -28,12 +28,13 @@
 
 - [x] (12/05/2020) reset les tours à chaque partie
 - [x] (12/05/2020) bug la personne est jump apres un 2 (à determiner)
-- [ ] bug finir par un deux (à determiner)
-- [ ] afficher la derniere carte quand la partie se termine
+- [x] (14/05/2020) bug finir par un deux (à determiner)
+- [x] (14/05/2020) afficher la derniere carte quand la partie se termine
 
 **10/05/2020**
 
-- [ ] gestion connect / deconnect entre les parties
+- [ ] gestion connection pendant partie
+- [ ] gestion deconnection pendant partie
 
 **27/04/2020**
 
@@ -52,7 +53,6 @@
 **25/04/2020**
 
 - [x] (28/04/2020) grab and scroll pour les cartes
-- [ ] gestion connexion nouveau joueur
 - [x] (14/05/2020) problèmes de sécurité (edit cote client) / verifier toutes les donnees cote serveur
 - [x] (28/04/2020) ajout class pot
 - [ ] ajout class hand
