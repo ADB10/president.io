@@ -33,8 +33,8 @@
 
 **10/05/2020**
 
-- [ ] gestion connection pendant partie
-- [ ] gestion deconnection pendant partie
+- [x] (14/05/2020) gestion connection pendant partie
+- [x] (14/05/2020) gestion deconnection pendant partie (4 joueurs min sinon bug)
 
 **27/04/2020**
 

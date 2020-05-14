@@ -44,9 +44,13 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('join_board', function(data){
         if(data.id_board != null && server.is_board_exist(data.id_board)){
-            socket.board = server.get_board_by_id(data.id_board) // view on board
-            socket.player = server.player_connected(data.pseudo, socket.board) // view on player
-            setup_socket_connection()
+            if(!server.is_board_in_game(data.id_board)){
+                socket.board = server.get_board_by_id(data.id_board) // view on board
+                socket.player = server.player_connected(data.pseudo, socket.board) // view on player
+                setup_socket_connection()
+            } else {
+                socket.emit('board_already_in_game')
+            }
         } else {
             socket.emit('connection_failed')
         }
@@ -71,8 +75,10 @@ io.sockets.on('connection', function(socket) {
     })
 
     socket.on('start_game', function(){
-        socket.board.start_game()
-        io.sockets.to(socket.board.get_id()).emit('ask_for_hand')
+        if(!socket.board.is_in_game()){
+            socket.board.start_game()
+            io.sockets.to(socket.board.get_id()).emit('ask_for_hand')
+        }
     })
 
     socket.on('ask_for_hand', function(){
@@ -125,6 +131,7 @@ io.sockets.on('connection', function(socket) {
                 socket.board.get_ranking().add_player(socket.board.get_player_turn())
                 socket.board.set_score_player()
                 socket.board.incr_party()
+                socket.board.set_in_game(false)
                 io.sockets.to(socket.board.get_id()).emit('end_game', socket.board)
             }
 

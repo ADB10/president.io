@@ -50,6 +50,11 @@ $('#login .right-side .form #join_board').click(function(){
     }
 })
 
+socket.on('board_already_in_game', function(){
+    $('#login .right-side .form .warning').text("La partie est déjà en cours, vous pourrez rejoindre à la fin de celle ci.");
+    $('#login .right-side .form .warning').fadeIn();
+})
+
 socket.on('connection_failed', function(){
     $('#login .right-side .form .warning').text("Mauvais code.");
     $('#login .right-side .form .warning').fadeIn();

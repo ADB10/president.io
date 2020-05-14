@@ -30,6 +30,10 @@ class Server{
         return res
     }
 
+    is_board_in_game(id_board){
+        return this.get_board_by_id(id_board).is_in_game()
+    }
+
     create_new_board(){
         let id_board = (Math.floor(Math.random() * Math.floor(9000)) + 1000) // id between 1000 - 9999
         while (this.is_board_exist(id_board + '')){

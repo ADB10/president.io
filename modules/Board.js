@@ -11,6 +11,7 @@ class Board{
         this.ranking = null
         this.round = 0
         this.party = 0
+        this.in_game = false
     }
 
     get_id(){
@@ -101,8 +102,16 @@ class Board{
         return this.jump
     }
 
+    is_in_game(){
+        return this.in_game
+    }
+
     set_jump(b){
         this.jump = b
+    }
+
+    set_in_game(b){
+        this.in_game = b
     }
 
     set_pot(p){
@@ -223,6 +232,7 @@ class Board{
         if(this.get_ranking() == null){ // if first game random else tdc (set in set_start_hands)
             this.player_turn = this.players[(Math.floor(Math.random() * Math.floor(this.players.length)))]
         }
+        this.in_game = true
         this.round_winner = false
         this.jump = false
         this.reset_players_fold()
