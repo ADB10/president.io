@@ -1,0 +1,23 @@
+body{
+    background-color: rgb(35,35,35);
+}
+
+.card{
+    position: relative;
+    background-color: rgb(250,250,250);
+    width: 62mm;
+    height: 88mm;
+    border-radius: 20px;
+}
+
+.card .suit{
+    font-weight: bold;
+    font-size: 30mm;
+}
+
+.as .suit{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
