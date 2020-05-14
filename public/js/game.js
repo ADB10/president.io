@@ -13,15 +13,16 @@ socket.on('ask_for_hand', function(){
     animation_transition('settings','game', 'grid')
     display_all_player_in_game()
     id_card_selected = []
-    $('#board_cards > .cards > *').remove()
+    $('#board_cards > .container > *').remove()
     $('#hand > *').remove()
+    $('#historic_content > *').remove()
     socket.emit('ask_for_hand')
 })
 
 socket.on('your_hand', function(hand){
     my_player.set_hand(JSON_parse_cards(hand))
-    display_hand()
     $('#players .nb_cards > span').text(my_player.get_hand().length)
+    display_hand()
     socket.emit('get_turn')
 })
 
@@ -38,7 +39,7 @@ socket.on('turn', function(data){
 
 socket.on('card_played', function(data){
     my_board.set_pot(JSON_parse_pot(data.pot))
-    display_nb_cards_player(data.id, data.score)
+    display_nb_cards_player(data.id, data.hand_size)
     display_card_board()
     socket.emit('get_turn')
 })
@@ -55,21 +56,20 @@ socket.on('player_jump', function(id_player){
     socket.emit('get_turn')
 })
 
-socket.on('round_winner', function(data){
+socket.on('player_ranked', function(player){
+    let p = JSON_parse_player(player)
+    my_board.get_player_by_id(p.get_id()).set_ranked(true)
+    display_player_ranked(p.get_id())
+})
+
+socket.on('end_round', function(data){
     $('#board_cards .cards > *').remove()
     socket.emit('update_player')
-    my_player.set_fold(false)
+    my_board.reset_players_fold()
     my_board.set_jump(false)
     my_board.incr_round()
-    if(data.is_ranked) my_board.get_player_by_id(data.winner_id).set_ranked(true)
-    if(data.is_pdt){
-        audio_wow.play()
-        add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> devient président')
-    } else {
-        add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> remporte le tour')
-    }
-    display_state_after_round_winner()
-    socket.emit('get_turn')
+    add_message_historic('<span class="player">' + data.winner_pseudo + '</span><span class="action"> remporte le tour')
+    display_state_after_end_round()
 })
 
 socket.on('end_game', function(board){
@@ -113,7 +113,7 @@ function display_card_board(){
         my_board.get_pot_cards().forEach(card => {
             $('#board_cards .cards').append('<div class="one_card" style="color:' + card.get_color() + '"> ' + card.get_name() + card.get_suit() + ' </div>')
             $("#board_cards .one_card" + card.get_id()).css("line-height", (window.innerHeight*0.2) + "px")
-            cards_text += '<span class="card_msg" style="color:' + card.get_color() + '">' + card.get_name() + ' ' + card.get_suit() + ' </span>'
+            cards_text += '<span class="card_msg" style="color:' + card.get_color() + '">' + card.get_name() + ' </span>'
         });
         add_message_historic('<div class="action" style="display:flex">' + cards_text + '</div>')
     }

@@ -32,14 +32,12 @@ function display_all_player_in_game(){
     });
 }
 
-function display_state_after_round_winner(){
+function display_state_after_end_round(){
     my_board.players.forEach(p => {
         if(p.is_ranked()){
             display_player_ranked(p.get_id())
         } else {
-            if(p.is_fold()){
-                display_player_in_game(p.get_id())
-            }
+            display_player_in_game(p.get_id())
         }
     });
 }

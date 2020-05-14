@@ -56,3 +56,12 @@ function check_good_weight(cards_sup, cards_inf){
         return cards_sup[0].is_better_or_equal(cards_inf[0])
     }
 }
+
+// assert client dont modify cards
+function assert_player_get_cards(player, cards){
+    let res = true
+    cards.forEach(c => {
+        if(player.get_card_by_id(c.get_id()) == null) res = false
+    });
+    return res
+}

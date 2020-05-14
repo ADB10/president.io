@@ -1,9 +1,27 @@
 # president.io
 
+## FONCTIONNEMENT
+
+[CLIENT] Un joueur lance la partie (start_game)
+[SERVER] Le serveur demande à tous les joueurs de demander leurs mains (ask_for_hand)
+[CLIENT] Les joueurs demandent leurs mains (ask_for_hand)
+[SERVER] Le serveur envoie la main de chaque joueur en privé (your_hand)
+[CLIENT] Les joueurs demandent à qui le tour (get_turn)
+    | [SERVER] Le serveur envoie à tout le monde à qui le tour (Joueur X) (turn)
+    | [CLIENT] Le joueur X choisi et envoie ses cartes au serveur (play_cards)
+        | [SERVER] Le serveur envoie a tout le monde les cartes (card_played)
+        | [SERVER] Le serveur previent que le joueur X a fini (player_ranked)
+        | [SERVER] Le serveur previent que le round est fini (end_round)
+        | [SERVER] Le serveur previent que la partie est finie (end_game)
+    | [CLIENT] Le joueur X passe son tour / est sweep (fold)
+        | [SERVER] Le serveur envoie a tout le monde que le joueur X a passé son tour (player_fold)
+        | [SERVER] Le serveur envoie a tout le monde que le joueur X s'est fait sweep (player_jump)
+
 ## TO DO LIST
 
-**12/05/2020**
+**13/05/2020**
 
+- [ ] bug si tout le monde passe son tour
 - [ ] ajout IA
 
 **11/05/2020**
@@ -35,7 +53,7 @@
 
 - [x] (28/04/2020) grab and scroll pour les cartes
 - [ ] gestion connexion nouveau joueur
-- [ ] problèmes de sécurité (edit cote client) / verifier toutes les donnees cote serveur
+- [x] (14/05/2020) problèmes de sécurité (edit cote client) / verifier toutes les donnees cote serveur
 - [x] (28/04/2020) ajout class pot
 - [ ] ajout class hand
 - [x] (27/04/2020) ajout regle : finir par un deux interdit
@@ -87,5 +105,3 @@
 
 * plateau de jeu
 * regles normales (excepter: pas de revolution, possibilité de finir par un 2, impossible de jouer sur un swip)
-
-## FONCTIONNEMENT
