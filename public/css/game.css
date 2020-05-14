@@ -19,6 +19,13 @@
     grid-template-rows: auto 250px;
 }
 
+#game #board_cards .info{
+    font-size: 20px;
+    margin-top: 50px;
+    width: 100;
+    text-align: center;
+}
+
 #game #board_cards .container{
     position: relative;
     width: 100%;

@@ -1,5 +1,6 @@
 // simple double triplet quad
 let id_card_selected = []
+let timer = null
 
 function start_game(){
     if(my_board.get_nb_players() > 3){
@@ -34,10 +35,12 @@ socket.on('turn', function(data){
         my_player.set_my_turn(true)
         audio_turn.play()
     }
+    start_timer(24)
     display_turn()
 })
 
 socket.on('card_played', function(data){
+    clearTimeout(timer)
     my_board.set_pot(JSON_parse_pot(data.pot))
     display_nb_cards_player(data.id, data.hand_size)
     display_card_board()
@@ -45,12 +48,14 @@ socket.on('card_played', function(data){
 })
 
 socket.on('player_fold', function(id_player){
+    clearTimeout(timer)
     display_player_sleep(id_player)
     add_message_historic('<span class="action"> se couche</span>')
     socket.emit('get_turn')
 })
 
 socket.on('player_jump', function(id_player){
+    clearTimeout(timer)
     display_player_sweep(id_player)
     add_message_historic('<span class="action"> s\'est fait sweep</span>')
     socket.emit('get_turn')
@@ -73,6 +78,7 @@ socket.on('end_round', function(data){
 })
 
 socket.on('end_game', function(board){
+    clearTimeout(timer)
     my_board = JSON_parse_board(board)
     display_ranking(my_board.get_ranking(), my_board.get_party(), my_board.get_round())
     my_board.round = 0
@@ -103,6 +109,7 @@ function display_hand(){
 }
 
 function display_turn(){
+    $('#board .info .player_turn').text(my_board.get_player_turn().get_name())
     add_message_historic('<span class="player">' + my_board.get_player_turn().get_name() + '</span>')
 }
 
@@ -168,6 +175,15 @@ function fold(){
     } else {
         console.log('Error (fold): not your turn')
     }
+}
+
+let sec_start_timer = null
+function start_timer(sec){
+    sec_start_timer = sec
+    timer = setInterval(function(){
+        $('#timer').text(sec_start_timer + '')
+        sec_start_timer--;
+    }, 1000)
 }
 
 function update_scrollbar(){

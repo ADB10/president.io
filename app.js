@@ -26,6 +26,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.player = null // view on player of board
     socket.board = null // view on board of server
+    socket.timer = null
 
     function setup_socket_connection(){
         socket.join(socket.board.get_id())
@@ -59,6 +60,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('disconnect', function(){
         if(socket.player != null){
             if(socket.board.get_player_turn() != null && socket.board.get_player_turn().get_id() == socket.player.get_id()){
+                clearTimeout(socket.timer)
                 socket.board.next_player_turn() // if it's his turn
                 if(socket.board.get_player_turn() != null){
                     io.sockets.to(socket.board.get_id()).emit('turn', {
@@ -90,11 +92,11 @@ io.sockets.on('connection', function(socket) {
 
         // check client dont change card value and the play is possible
         if(assert_player_get_cards(socket.player, cards) && ((!socket.board.is_jump() && check_play_possible(cards, socket.board.get_pot().get_cards())) || (socket.board.is_jump() && check_jump_play_possible(cards, socket.board.get_pot().get_cards())))){
-
             // set new pot and upadte player status
             socket.board.get_pot().add_new_pot(socket.player, cards)
             socket.board.remove_cards_of_player(socket.player.get_id(), cards)
             socket.board.update_player_statut(socket.player.get_id())
+            clearTimeout(socket.timer)
             if(socket.board.get_pot().is_jump()) socket.board.set_jump(true)
             socket.board.next_player_turn()
             
@@ -142,6 +144,7 @@ io.sockets.on('connection', function(socket) {
     })
 
     socket.on('fold', function(){
+        clearTimeout(socket.timer)
         socket.board.next_player_turn()
         if(socket.board.is_jump()){
             socket.board.set_jump(false)
@@ -149,7 +152,7 @@ io.sockets.on('connection', function(socket) {
         } else {
             socket.player.set_fold(true)
             io.sockets.to(socket.board.get_id()).emit('player_fold', socket.player.get_id())   
-        }         
+        }
     })
 
     socket.on('update_player', function(){
@@ -157,6 +160,15 @@ io.sockets.on('connection', function(socket) {
     })
 
     socket.on('get_turn', function(){
+
+        if(socket.board.get_player_turn().get_id() == socket.player.get_id()){
+            socket.timer = setTimeout(function(){
+                socket.board.next_player_turn()
+                socket.player.set_fold(true)
+                io.sockets.to(socket.board.get_id()).emit('player_fold', socket.player.get_id())
+            }, 25 * 1000)
+        }
+
         // if winner after all fold
         if(socket.board.is_round_winner()){
             io.sockets.to(socket.board.get_id()).emit('end_round', {
