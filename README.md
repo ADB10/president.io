@@ -1,6 +1,6 @@
 # president.io
 
-Pour jouer : [president.adrianbeanrd.fr](https://president.adrianbenard.fr/)
+Pour jouer :
 
 ## FONCTIONNEMENT
 
